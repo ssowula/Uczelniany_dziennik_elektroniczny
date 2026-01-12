@@ -18,7 +18,7 @@ namespace dziennik
         {
         }
     }
-    abstract class Osoba
+    public abstract class Osoba
     {
         int id;
         string imie;
