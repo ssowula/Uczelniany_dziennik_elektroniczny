@@ -50,17 +50,7 @@ namespace dziennik
 
         public int CompareTo(Student? other)
         {
-            if (other == null) return 1;
-
-            int wynikPorownaniaNazwisk = this.Nazwisko.CompareTo(other.Nazwisko);
-
-            if (wynikPorownaniaNazwisk != 0)
-            {
-                return wynikPorownaniaNazwisk;
-            }
-
-            return this.Imie.CompareTo(other.Imie);
-            
+            return base.CompareTo(other);
         }
     }
 }

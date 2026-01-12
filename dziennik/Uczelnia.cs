@@ -49,5 +49,16 @@ namespace dziennik
         {
             Studenci.Sort();
         }
+
+        public void SortujProwadzacych()
+        {
+            Prowadzacy.Sort();
+        }
+
+        public void SortujProwadzacychPoTytule()
+        {
+            
+            Prowadzacy.Sort(new ProwadzacyTytulComparer());
+        }
     }
 }
