@@ -43,7 +43,7 @@ namespace dziennik
             if (x == null || y == null) return 0;
 
             
-            int wynikTytul = x.TytulNaukowy.CompareTo(y.TytulNaukowy);
+            int wynikTytul = y.TytulNaukowy.CompareTo(x.TytulNaukowy);
 
             if (wynikTytul != 0)
             {
