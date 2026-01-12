@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    internal class Kierunek
+    public class Kierunek
     {
         int idKierunku;
         string nazwaKierunku;
