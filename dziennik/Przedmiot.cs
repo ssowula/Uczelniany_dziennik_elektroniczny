@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    class Przedmiot
+    public class Przedmiot
     {
         string nazwa;
         Prowadzacy prowadzacy;
