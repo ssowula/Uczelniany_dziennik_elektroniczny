@@ -10,10 +10,12 @@ namespace dziennik
     {
         int idKierunku;
         string nazwaKierunku;
-        List<Przedmiot> przedmioty;
+        List<Semestr> semestry;
 
         public int IdKierunku { get => idKierunku; set => idKierunku = value; }
         public string NazwaKierunku { get => nazwaKierunku; set => nazwaKierunku = value; }
+        public List<Semestr> Semestry { get => semestry; set => semestry = value; }
+
         public Kierunek() 
         {
             IdKierunku = 0;
@@ -23,6 +25,8 @@ namespace dziennik
         {
             IdKierunku ++;
             NazwaKierunku = nazwaKierunku;
+            Semestry = new List<Semestr>();
         }
+
     }
 }
