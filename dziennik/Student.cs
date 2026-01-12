@@ -12,7 +12,7 @@ namespace dziennik
         string numerAlbumu;
 
         Kierunek kierunek;
-        List<Przedmiot> przedmioty;
+        public List<Przedmiot> przedmioty;
 
 
         public string NumerAlbumu { get => numerAlbumu; set => numerAlbumu = value; }
