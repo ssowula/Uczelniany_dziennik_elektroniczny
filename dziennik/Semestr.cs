@@ -8,8 +8,8 @@ namespace dziennik
 {
     public enum EnumTyp
     {   
-        Zima,
-        Lato 
+        Zimowy,
+        Letni 
     }
     public class Semestr
     {
@@ -23,7 +23,7 @@ namespace dziennik
         public Semestr()
         {
             rokAkademicki = 0;
-            typ = EnumTyp.Zima;
+            typ = EnumTyp.Zimowy;
             Przedmioty = new List<Przedmiot>();
         }
         public Semestr(int rokAkademicki, EnumTyp typ) : this()
