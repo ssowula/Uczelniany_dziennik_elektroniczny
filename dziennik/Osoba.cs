@@ -18,7 +18,7 @@ namespace dziennik
         {
         }
     }
-    public abstract class Osoba
+    public abstract class Osoba : IComparable<Osoba>
     {
         int id;
         string imie;
@@ -75,6 +75,18 @@ namespace dziennik
             Imie = imie;
             Nazwisko = nazwisko;
             Pesel = pesel;
+        }
+
+        public int CompareTo(Osoba? other)
+        {
+            if (other == null) return 1;
+
+            int wynikNazwisko = this.Nazwisko.CompareTo(other.Nazwisko);
+
+            if (wynikNazwisko != 0)
+                return wynikNazwisko;
+
+            return this.Imie.CompareTo(other.Imie);
         }
     }
 }

@@ -45,5 +45,20 @@ namespace dziennik
         {
             Prowadzacy.Remove(prowadzacy);
         }
+        public void SortujStudentow()
+        {
+            Studenci.Sort();
+        }
+
+        public void SortujProwadzacych()
+        {
+            Prowadzacy.Sort();
+        }
+
+        public void SortujProwadzacychPoTytule()
+        {
+            
+            Prowadzacy.Sort(new ProwadzacyTytulComparer());
+        }
     }
 }

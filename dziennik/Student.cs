@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    public class Student : Osoba
+    public class Student : Osoba, IComparable<Student>
     {
         static int licznik_studenci = 1;
         string numerAlbumu;
@@ -46,7 +46,11 @@ namespace dziennik
         {
             string result = licznik_studenci.ToString() + Pesel.Substring(7);
             return result;
-        }   
+        }
 
+        public int CompareTo(Student? other)
+        {
+            return base.CompareTo(other);
+        }
     }
 }
