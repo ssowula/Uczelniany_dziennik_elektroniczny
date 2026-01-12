@@ -12,6 +12,8 @@ namespace dziennik
         string numerAlbumu;
         public string NumerAlbumu { get => numerAlbumu; set => numerAlbumu = value; }
 
+
+
         public Student(string imie, string nazwisko, string pesel) : base(licznik_studenci,imie,nazwisko,pesel)
         {
             NumerAlbumu = utworz_album();
