@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dziennik", "dziennik\dziennik.csproj", "{FA7DAB8F-7761-433F-905A-90CFC958A7E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testy Jednostkowe", "Testy Jednostkowe\Testy Jednostkowe.csproj", "{1D82B6F2-BFE2-18EA-2675-C80F78227599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DziennikGUI", "DziennikGUI\DziennikGUI.csproj", "{A0AE4983-167F-E315-7E14-9A8D3369D153}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1D82B6F2-BFE2-18EA-2675-C80F78227599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D82B6F2-BFE2-18EA-2675-C80F78227599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D82B6F2-BFE2-18EA-2675-C80F78227599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0AE4983-167F-E315-7E14-9A8D3369D153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0AE4983-167F-E315-7E14-9A8D3369D153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0AE4983-167F-E315-7E14-9A8D3369D153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0AE4983-167F-E315-7E14-9A8D3369D153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
