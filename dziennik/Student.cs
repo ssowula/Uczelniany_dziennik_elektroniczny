@@ -17,7 +17,7 @@ namespace dziennik
 
         public string NumerAlbumu { get => numerAlbumu; set => numerAlbumu = value; }
         public Kierunek Kierunek { get => kierunek; set => kierunek = value; }
-
+        public static int Licznik_studenci { get => licznik_studenci;}
 
         public Student(string imie, string nazwisko, string pesel) : base(licznik_studenci,imie,nazwisko,pesel)
         {
