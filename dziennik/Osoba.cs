@@ -26,8 +26,32 @@ namespace dziennik
         string pesel;
 
         public int Id { get => id; }
-        public string Imie { get => imie; set => imie = value; }
-        public string Nazwisko { get => nazwisko; set => nazwisko = value; }
+        public string Imie { get => imie;
+            set 
+            { 
+                if(string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Imię nie może być puste");
+                }
+                else
+                {
+                    imie = value;
+                }
+            }
+        }
+        public string Nazwisko { get => nazwisko; 
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Nazwisko nie może być puste");
+                }
+                else
+                {
+                    nazwisko = value;
+                }
+            } 
+        }
         public string Pesel { get => pesel; set 
             {
                 if (Regex.IsMatch(value, @"^\d{11}$"))
@@ -42,6 +66,8 @@ namespace dziennik
         }
 
         public Osoba() { }
+        
+        
 
         public Osoba(int id, string imie, string nazwisko, string pesel)
         {
