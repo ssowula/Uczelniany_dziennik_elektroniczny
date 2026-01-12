@@ -45,5 +45,9 @@ namespace dziennik
         {
             Prowadzacy.Remove(prowadzacy);
         }
+        public void SortujStudentow()
+        {
+            Studenci.Sort();
+        }
     }
 }
