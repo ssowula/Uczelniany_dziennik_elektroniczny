@@ -11,11 +11,13 @@ namespace dziennik
         string nazwa;
         Prowadzacy prowadzacy;
         int ects;
+        List<Ocena> oceny = new List<Ocena>();
 
 
         public string Nazwa { get => nazwa; set => nazwa = value; }
         public Prowadzacy Prowadzacy { get => prowadzacy; set => prowadzacy = value; }
         public int Ects { get => ects; set => ects = value; }
+        public List<Ocena> Oceny { get => oceny; set => oceny = value; }
 
         public Przedmiot() 
         {
@@ -30,6 +32,11 @@ namespace dziennik
             Nazwa = nazwa;
             Prowadzacy = prowadzacy;
             Ects = ects;
+        }
+
+        public void DodajOcene(Ocena ocena)
+        {
+            Oceny.Add(ocena);
         }
 
 

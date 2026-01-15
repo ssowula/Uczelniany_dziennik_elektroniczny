@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
+    
     public class Ocena
     {
         Student student;
