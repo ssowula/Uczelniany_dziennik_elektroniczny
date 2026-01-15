@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,6 @@ namespace dziennik
             string result = licznik_studenci.ToString() + Pesel.Substring(7);
             return result;
         }
-
         public int CompareTo(Student? other)
         {
             return base.CompareTo(other);
