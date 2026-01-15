@@ -10,7 +10,7 @@ namespace Testy_Jednostkowe
         {
             Assert.ThrowsException<ZlyPeselException>(() => { var student = new Student("Adam", "Łukasik", "123"); });
             Assert.ThrowsException<ZlyPeselException>(() => { var student = new Student("Adam", "Łukasik", "123abc"); });
-        }
+        } 
 
         [TestMethod]
         public void TestNumerAlbumu()
@@ -60,6 +60,16 @@ namespace Testy_Jednostkowe
             var s2 = new Student("Tomasz", "Król", "11122244412");
 
             Assert.IsTrue(s1.CompareTo(s2) != 0);
+        }
+    }
+
+    [TestClass]
+    public sealed class UczelniaTest
+    {
+        [TestMethod]
+        public void TestDodajKierunek()
+        {
+
         }
     }
 }

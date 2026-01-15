@@ -14,7 +14,6 @@ namespace dziennik
         Kierunek kierunek;
         List<Przedmiot> przedmioty;
 
-
         public string NumerAlbumu { get => numerAlbumu; set => numerAlbumu = value; }
         public Kierunek Kierunek { get => kierunek; set => kierunek = value; }
         public static int Licznik_studenci { get => licznik_studenci;}
