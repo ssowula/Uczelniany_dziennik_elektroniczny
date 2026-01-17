@@ -37,12 +37,12 @@ namespace dziennik
         public Przedmiot Przedmiot { get => przedmiot; set => przedmiot = value; }
         public Student Student { get => student; set => student = value; }
 
-        public Ocena(Student student, Przedmiot przedmiot, int wartosc, DateTime dataWystawienia)
+        public Ocena(Student student, Przedmiot przedmiot, double wartosc)
         {
             Student = student;
             Przedmiot = przedmiot;
             Wartosc = wartosc;
-            DataWystawienia = dataWystawienia;
+            DataWystawienia = DateTime.Now;
         }
 
     }
