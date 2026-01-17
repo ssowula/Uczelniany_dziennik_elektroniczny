@@ -22,7 +22,7 @@ namespace Testy_Jednostkowe
         }
 
         [TestMethod]
-        public void TestDodajPrzedmiot()
+        public void TestDodajUsunPrzedmiot()
         {
             var student = new Student("Adam", "Łukasik", "12345678911");
 
@@ -32,26 +32,13 @@ namespace Testy_Jednostkowe
 
             student.DodajPrzedmiot(przedmiot);
 
-            Assert.IsTrue(student.Przedmioty.Contains(przedmiot));
-        }
-
-        [TestMethod]
-        public void TestUsunPrzedmiot()
-        {
-            var student = new Student("Adam", "Łukasik", "12345678911");
-
-            var prowadzacy = new Prowadzacy("Jacek", "Wolak", "11122233311", EnumTytulNaukowy.Doktor);
-
-            var przedmiot = new Przedmiot("Wstęp do analizy danych", prowadzacy, 3);
-
-            student.DodajPrzedmiot(przedmiot);
-
-            Assert.IsTrue(student.Przedmioty.Contains(przedmiot));
+            Assert.IsTrue(student.PrzedmiotyOceny.Any(x => x.Przedmiot == przedmiot));
 
             student.UsunPrzedmiot(przedmiot);
 
-            Assert.IsFalse(student.Przedmioty.Contains(przedmiot));
+            Assert.IsFalse(student.PrzedmiotyOceny.Any(x => x.Przedmiot == przedmiot));
         }
+
 
         [TestMethod]
         public void TestCompareTo()
@@ -64,12 +51,18 @@ namespace Testy_Jednostkowe
     }
 
     [TestClass]
-    public sealed class UczelniaTest
+    public sealed class OcenaTest
     {
         [TestMethod]
-        public void TestDodajKierunek()
+        public void TestWalidacjaOceny()
         {
+            var student = new Student("Adam", "Łukasik", "12345678911");
+            var prowadzacy = new Prowadzacy("Jacek", "Wolak", "11122233311", EnumTytulNaukowy.Doktor);
+            var przedmiot = new Przedmiot("Wstęp do analizy danych", prowadzacy, 3);
+            double ocena = 8;
 
+            Assert.ThrowsException<NiepoprawnaOcenaException>(() => { var o1 = new Ocena(student, przedmiot, ocena); });
+           
         }
     }
 }
