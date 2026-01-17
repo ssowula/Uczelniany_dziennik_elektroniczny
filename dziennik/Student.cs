@@ -57,5 +57,20 @@ namespace dziennik
         {
             return base.CompareTo(other);
         }
+
+        public void DodajOcene(Przedmiot p, double wartosc)
+        {
+            var przedmiot = przedmiotyOceny.FirstOrDefault(x=>x.Przedmiot == p);
+
+            if (przedmiot != null)
+            {
+                Ocena ocena = new Ocena(this, p, wartosc);
+                przedmiot.Oceny.Add(ocena);
+            }
+            else
+            {
+                throw new Exception("Student nie jest zapisany na ten przedmiot");
+            }
+        }
     }
 }
