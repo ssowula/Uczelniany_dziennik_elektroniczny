@@ -126,18 +126,35 @@ namespace dziennik
 
         public string GenerujRaport()
         {
-            StringBuilder sb = new StringBuilder(); 
+            StringBuilder sb = new StringBuilder();
             sb.AppendLine($" ==== RAPORT ==== ");
             sb.AppendLine($"{PobierzInformacje()}");
             sb.AppendLine(" == OCENY == ");
             foreach (var po in przedmiotyOceny)
             {
                 sb.AppendLine($"Przedmiot: {po.Przedmiot.Nazwa}");
+                sb.AppendLine($"Prowadzący: {po.Przedmiot.Prowadzacy.Nazwisko}");
+                double srednia = po.SredniaOcen();
+                if(srednia > 0) {
+                    sb.AppendLine($"Średnia ocen: {srednia:F2}");
+                }
+                else
+                {
+                    sb.AppendLine("Średnia: Brak ocen");
+                }
+                sb.AppendLine("Oceny:");
                 foreach (var ocena in po.Oceny)
                 {
                     sb.AppendLine($" - Ocena: {ocena.Wartosc}");
                 }
                 sb.AppendLine("----------------");
+
+            }
+            var srednia_cal = przedmiotyOceny.SelectMany(x => x.Oceny).ToList();
+            if (srednia_cal.Count > 0)
+            {
+                double srednia_ogolna = srednia_cal.Average(o => o.Wartosc);
+                sb.AppendLine($"ŚREDNIA CAŁKOWITA: {srednia_ogolna:F2}");
             }
             return sb.ToString();
         }

@@ -23,5 +23,14 @@ namespace dziennik
             Przedmiot = przedmiot;
             
         }
+
+        public double SredniaOcen()
+        {
+            if (Oceny.Count == 0)
+            {
+                return 0.0;
+            }
+            return Oceny.Average(o => o.Wartosc);
+        }
     }
 }
