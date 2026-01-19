@@ -6,7 +6,7 @@ namespace DziennikGUI
 {
     public partial class MainWindow : Window
     {
-  
+
         Uczelnia uczelnia = new Uczelnia();
 
         public MainWindow()
@@ -14,42 +14,38 @@ namespace DziennikGUI
             InitializeComponent();
         }
 
-        void ButtonDodaj_Click(object sender, RoutedEventArgs e)
+        private void BtnZaloguj_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string login = txtLogin.Text.Trim();
+            string haslo = txtHaslo.Password.Trim();
+
+            if (login == "admin" && haslo == "admin")
             {
-                string imie = txtImie.Text;
-                string nazwisko = txtNazwisko.Text;
-                string pesel = txtPesel.Text;
-
-                Student nowyStudent = new Student(imie, nazwisko, pesel);
-
-                uczelnia.DodajStudenta(nowyStudent);
-
-                OdswiezListe();
-                WyczyscPola();
-
+                OknoDziekanat okno = new OknoDziekanat();
+                okno.Show();
+                this.Close();
+                return;
             }
-            catch (Exception ex)
+
+            var student = uczelnia.Studenci.FirstOrDefault(s => s.NumerAlbumu == login && s.Pesel == haslo);
+
+            if (student != null)
             {
-                MessageBox.Show($"Błąd: {ex.Message}", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Error);
+                OknoStudent okno = new OknoStudent();
+                okno.Show();
+                this.Close();
+                return;
             }
-        }
 
-        void OdswiezListe()
-        {
-            listaStudentow.Items.Clear();
-            foreach (var student in uczelnia.Studenci)
+            var prowadzacy = uczelnia.Prowadzacy.FirstOrDefault(p => p.Nazwisko == login && p.Pesel == haslo);
+
+            if (prowadzacy != null)
             {
-                listaStudentow.Items.Add(student.PobierzInformacje());
+                OknoProwadzacy okno = new OknoProwadzacy();
+                okno.Show();
+                this.Close();
+                return;
             }
-        }
-
-        void WyczyscPola()
-        {
-            txtImie.Clear();
-            txtNazwisko.Clear();
-            txtPesel.Clear();
         }
     }
 }
