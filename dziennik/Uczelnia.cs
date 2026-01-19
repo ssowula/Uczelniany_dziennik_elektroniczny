@@ -31,13 +31,14 @@ namespace dziennik
         }
         public void DodajStudenta(Student student)
         {
+            
             if (!Studenci.Contains(student))
             {
                 Studenci.Add(student);
             }
             else
             {
-                Console.WriteLine($"Student o numerze Pesel {student.Pesel} już istnieje w systemie!");
+                throw new Exception($"Student o numerze Pesel {student.Pesel} już istnieje w systemie!");
             }
                
         }
@@ -49,7 +50,7 @@ namespace dziennik
             }
             else
             {
-                Console.WriteLine($"Student o numerze Pesel {student.Pesel} nie istnieje w systemie!");
+                throw new Exception($"Student o numerze Pesel {student.Pesel} nie istnieje w systemie!");
             }
                 
         }
