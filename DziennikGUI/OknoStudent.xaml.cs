@@ -20,9 +20,11 @@ namespace DziennikGUI
         private void ZaladujDane()
         {
             txtPowitanie.Text = $"Witaj, {zalogowanyStudent.Imie} {zalogowanyStudent.Nazwisko}!";
+            txtData.Text = $"Data: {DateTime.Now.ToString("dd.MM.yyyy")}";
+            txtNumeralbumu.Text = $"Numer albumu: {zalogowanyStudent.NumerAlbumu}";
 
             listaOcen.Items.Clear();
-
+            
 
             foreach (var przedmiot in zalogowanyStudent.PrzedmiotyOceny)
             {
@@ -31,13 +33,15 @@ namespace DziennikGUI
 
                 string linia = $"{nazwaPrzedmiotu} {ects}";
                 listaOcen.Items.Add(linia);
+                double srednia = przedmiot.SredniaOcen();
+                listaOcen.Items.Add($"   Średnia ocen: {srednia:F2}");
 
                 if (przedmiot.Oceny.Count > 0)
                 {
-                    string ocenyTekst = "   Oceny: ";
+                    string ocenyTekst = "   Oceny: \n";
                     foreach (var ocena in przedmiot.Oceny)
                     {
-                        ocenyTekst += $"{ocena.Wartosc}, ";
+                        ocenyTekst += $"{ocena.Wartosc} [{ocena.DataWystawienia.ToShortDateString()}] \n";
                     }
                     listaOcen.Items.Add(ocenyTekst.TrimEnd(',', ' '));
                 }

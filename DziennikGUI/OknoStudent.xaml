@@ -17,5 +17,8 @@
 
         <Button Grid.Row="2" Content="Wyloguj" Click="BtnWyloguj_Click" 
                 Height="40" Background="#FFDDDD" FontWeight="SemiBold"/>
+        <TextBlock x:Name="txtNumeralbumu" TextWrapping="Wrap" Text="TextBlock" Margin="0,-8,315,28" FontSize="12"/>
+        <TextBlock x:Name="txtData" TextWrapping="Wrap" Text="TextBlock" Margin="315,-8,0,28" FontSize="12" TextAlignment="Right"/>
+
     </Grid>
 </Window>
