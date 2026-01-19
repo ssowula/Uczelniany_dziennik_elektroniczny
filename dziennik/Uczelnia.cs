@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    internal class Uczelnia
+    public class Uczelnia
     {
         List<Kierunek> kierunki;
         List<Student> studenci;
@@ -14,7 +14,7 @@ namespace dziennik
 
         public List<Student> Studenci { get => studenci; set => studenci = value; }
         public List<Prowadzacy> Prowadzacy { get => prowadzacy; set => prowadzacy = value; }
-        internal List<Kierunek> Kierunki { get => kierunki; set => kierunki = value; }
+        public List<Kierunek> Kierunki { get => kierunki; set => kierunki = value; }
         public Uczelnia()
         {
             Kierunki = new List<Kierunek>();

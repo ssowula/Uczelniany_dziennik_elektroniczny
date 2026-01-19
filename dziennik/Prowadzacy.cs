@@ -24,6 +24,7 @@ namespace dziennik
         public EnumTytulNaukowy TytulNaukowy { get => tytulNaukowy; set => tytulNaukowy = value; }
         public static int Licznik_prowadzacy { get => licznik_prowadzacy; set => licznik_prowadzacy = value; }
 
+        public Prowadzacy() : base() { }
         public Prowadzacy(string imie, string nazwisko, string pesel, EnumTytulNaukowy tytulNaukowy): base(licznik_prowadzacy, imie, nazwisko, pesel)
         {
             TytulNaukowy = tytulNaukowy;
