@@ -11,8 +11,7 @@ namespace dziennik
         string nazwa;
         Prowadzacy prowadzacy;
         int ects;
-        List<Ocena> oceny;
-
+       
 
 
         public string Nazwa { get => nazwa; set => nazwa = value; }
@@ -42,7 +41,6 @@ namespace dziennik
         {
             oceny.Remove(o);
         }
-
 
     }
 }

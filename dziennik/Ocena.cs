@@ -7,24 +7,42 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    
+    public class NiepoprawnaOcenaException : Exception
+    {
+        public NiepoprawnaOcenaException()
+        {
+        }
+
+        public NiepoprawnaOcenaException(string? message) : base(message)
+        {
+        }
+    }
     public class Ocena
     {
         Student student;
         Przedmiot przedmiot;
-        int wartosc;
+        double wartosc;
         DateTime dataWystawienia;
-        public int Wartosc { get => wartosc; set => wartosc = value; }
+        public double Wartosc { get => wartosc; set { 
+            if(value is 2 or 3 or 3.5 or 4 or 4.5 or 5)
+                {
+                    wartosc = value;
+                }
+            else
+            {
+                throw new NiepoprawnaOcenaException("Taka ocena nie istnieje");
+            }   
+            } }
         public DateTime DataWystawienia { get => dataWystawienia; set => dataWystawienia = value; }
         public Przedmiot Przedmiot { get => przedmiot; set => przedmiot = value; }
         public Student Student { get => student; set => student = value; }
 
-        public Ocena(Student student, Przedmiot przedmiot, int wartosc, DateTime dataWystawienia)
+        public Ocena(Student student, Przedmiot przedmiot, double wartosc)
         {
             Student = student;
             Przedmiot = przedmiot;
             Wartosc = wartosc;
-            DataWystawienia = dataWystawienia;
+            DataWystawienia = DateTime.Now;
         }
 
     }
