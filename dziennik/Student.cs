@@ -75,5 +75,10 @@ namespace dziennik
                 throw new Exception("Student nie jest zapisany na ten przedmiot");
             }
         }
+
+        public override string PobierzInformacje()
+        {
+            return $"[Student] {base.PobierzInformacje()}, numer albumu: {NumerAlbumu}";
+        }
     }
 }
