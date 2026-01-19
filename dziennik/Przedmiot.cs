@@ -17,7 +17,7 @@ namespace dziennik
         public string Nazwa { get => nazwa; set => nazwa = value; }
         public Prowadzacy Prowadzacy { get => prowadzacy; set => prowadzacy = value; }
         public int Ects { get => ects; set => ects = value; }
-        public List<Ocena> Oceny { get => oceny; }
+        
 
         public Przedmiot() 
         {
@@ -33,14 +33,7 @@ namespace dziennik
             Prowadzacy = prowadzacy;
             Ects = ects;
         }
-        public void DodajOcene(Ocena o)
-        {
-            oceny.Add(o);
-        }
-        public void UsunOcene(Ocena o)
-        {
-            oceny.Remove(o);
-        }
+        
 
     }
 }

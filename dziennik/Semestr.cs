@@ -19,7 +19,7 @@ namespace dziennik
 
         public int RokAkademicki { get => rokAkademicki; set => rokAkademicki = value; }
         public List<Przedmiot> Przedmioty { get => przedmioty; set => przedmioty = value; }
-        internal EnumTyp Typ { get => typ; set => typ = value; }
+        public EnumTyp Typ { get => typ; set => typ = value; }
         public Semestr()
         {
             rokAkademicki = 0;
