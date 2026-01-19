@@ -84,7 +84,7 @@ namespace dziennik
         public bool Equals(Student? other)
         {
             if(other == null) return false;
-            return this.NumerAlbumu == other.NumerAlbumu;
+            return this.Pesel == other.Pesel;
         }
         public override bool Equals(object? obj)
         {

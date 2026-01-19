@@ -25,7 +25,7 @@ namespace dziennik
         string nazwisko;
         string pesel;
 
-        public int Id { get => id; }
+        public int Id { get => id; set => id = value; }
         public string Imie { get => imie;
             set 
             { 
@@ -33,10 +33,18 @@ namespace dziennik
                 {
                     throw new ArgumentException("Imię nie może być puste");
                 }
+
+                string czysteImie = value.Trim();
+
+                if (czysteImie.Length > 0)
+                {
+                    imie = char.ToUpper(czysteImie[0]) + czysteImie.Substring(1).ToLower();
+                }
                 else
                 {
-                    imie = value;
+                    imie = czysteImie;
                 }
+
             }
         }
         public string Nazwisko { get => nazwisko; 
@@ -46,9 +54,16 @@ namespace dziennik
                 {
                     throw new ArgumentException("Nazwisko nie może być puste");
                 }
+
+                string czysteNazwisko = value.Trim();
+
+                if (czysteNazwisko.Length > 0)
+                {
+                    nazwisko = char.ToUpper(czysteNazwisko[0]) + czysteNazwisko.Substring(1).ToLower();
+                }
                 else
                 {
-                    nazwisko = value;
+                    nazwisko = czysteNazwisko;
                 }
             } 
         }
