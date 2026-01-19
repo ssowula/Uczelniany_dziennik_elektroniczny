@@ -76,13 +76,12 @@ namespace Testy_Jednostkowe
         [TestMethod]
         public void TestWalidacjaOceny()
         {
-            var student = new Student("Adam", "Łukasik", "12345678911");
             var prowadzacy = new Prowadzacy("Jacek", "Wolak", "11122233311", EnumTytulNaukowy.Doktor);
             var przedmiot = new Przedmiot("Wstęp do analizy danych", prowadzacy, 3);
-            double ocena = 8;
+            double blednaOcena = 8.0;
 
-            Assert.ThrowsException<NiepoprawnaOcenaException>(() => { var o1 = new Ocena(student, przedmiot, ocena); });
-           
+            Assert.ThrowsException<NiepoprawnaOcenaException>(() => { var o1 = new Ocena(przedmiot, blednaOcena); });
+
         }
     }
 }
