@@ -56,11 +56,25 @@ namespace dziennik
         }
         public void DodajProwadzacego(Prowadzacy prowadzacy)
         {
-            Prowadzacy.Add(prowadzacy);
+            if(!Prowadzacy.Contains(prowadzacy))
+            {
+                Prowadzacy.Add(prowadzacy);
+            }
+            else
+            {
+                throw new Exception($"Prowadzący o numerze Pesel {prowadzacy.Pesel} już istnieje w systemie!");
+            }
         }
         public void UsunProwadzacego(Prowadzacy prowadzacy)
         {
-            Prowadzacy.Remove(prowadzacy);
+            if (Prowadzacy.Contains(prowadzacy))
+            {
+                Prowadzacy.Remove(prowadzacy);
+            }
+            else
+            {
+                throw new Exception($"Prowadzący o numerze Pesel {prowadzacy.Pesel} nie istnieje w systemie!");
+            }
         }
         public void SortujStudentow()
         {
