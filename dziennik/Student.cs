@@ -86,6 +86,21 @@ namespace dziennik
             if(other == null) return false;
             return this.NumerAlbumu == other.NumerAlbumu;
         }
+        public override bool Equals(object? obj)
+        {
+            if (obj is Student other)
+            {
+                return this.Equals(other); 
+            }
+            return false;
+        }
+
+        
+        public override int GetHashCode()
+        {
+            
+            return NumerAlbumu.GetHashCode();
+        }
 
         public object Clone()
         {
