@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    public class Student : Osoba, IComparable<Student>
+    public class Student : Osoba, IComparable<Student>, IEquatable<Student>, ICloneable
     {
         static int licznik_studenci = 1;
         string numerAlbumu;
@@ -79,6 +79,33 @@ namespace dziennik
         public override string PobierzInformacje()
         {
             return $"[Student] {base.PobierzInformacje()}, numer albumu: {NumerAlbumu}";
+        }
+
+        public bool Equals(Student? other)
+        {
+            if(other == null) return false;
+            return this.NumerAlbumu == other.NumerAlbumu;
+        }
+
+        public object Clone()
+        {
+            Student kopia = (Student)this.MemberwiseClone();
+            kopia.przedmiotyOceny = new List<PrzedmiotOceny>();
+            foreach (var po in this.przedmiotyOceny)
+            {
+                PrzedmiotOceny kopiaPo = new PrzedmiotOceny();
+                kopiaPo.Przedmiot = po.Przedmiot;
+                kopiaPo.Oceny = new List<Ocena>();
+                foreach (var ocena in po.Oceny)
+                {
+                    Ocena kopiaOcena = new Ocena();
+                    kopiaOcena.Przedmiot = ocena.Przedmiot;
+                    kopiaOcena.Wartosc = ocena.Wartosc;
+                    kopiaPo.Oceny.Add(kopiaOcena);
+                }
+                kopia.przedmiotyOceny.Add(kopiaPo);
+            }
+            return kopia;
         }
     }
 }
