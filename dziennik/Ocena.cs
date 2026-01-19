@@ -19,7 +19,7 @@ namespace dziennik
     }
     public class Ocena
     {
-        Student student;
+        
         Przedmiot przedmiot;
         double wartosc;
         DateTime dataWystawienia;
@@ -35,11 +35,11 @@ namespace dziennik
             } }
         public DateTime DataWystawienia { get => dataWystawienia; set => dataWystawienia = value; }
         public Przedmiot Przedmiot { get => przedmiot; set => przedmiot = value; }
-        public Student Student { get => student; set => student = value; }
 
-        public Ocena(Student student, Przedmiot przedmiot, double wartosc)
+        public Ocena() { }
+
+        public Ocena(Przedmiot przedmiot, double wartosc)
         {
-            Student = student;
             Przedmiot = przedmiot;
             Wartosc = wartosc;
             DataWystawienia = DateTime.Now;

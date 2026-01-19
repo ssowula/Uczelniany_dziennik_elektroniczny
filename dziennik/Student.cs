@@ -20,11 +20,14 @@ namespace dziennik
         public Kierunek Kierunek { get => kierunek; set => kierunek = value; }
         public static int Licznik_studenci { get => licznik_studenci;}
         public List<PrzedmiotOceny> PrzedmiotyOceny { get => przedmiotyOceny; }
+        public Student() : base()
+        {
+            przedmiotyOceny = new List<PrzedmiotOceny>();
+        }
 
         public Student(string imie, string nazwisko, string pesel) : base(licznik_studenci,imie,nazwisko,pesel)
         {
             NumerAlbumu = utworz_album();
-            przedmiotyOceny = new List<PrzedmiotOceny>();
             licznik_studenci++;
         }
 
@@ -64,7 +67,7 @@ namespace dziennik
 
             if (przedmiot != null)
             {
-                Ocena ocena = new Ocena(this, p, wartosc);
+                Ocena ocena = new Ocena(p, wartosc);
                 przedmiot.Oceny.Add(ocena);
             }
             else
