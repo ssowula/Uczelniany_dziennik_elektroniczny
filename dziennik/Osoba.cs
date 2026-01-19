@@ -88,5 +88,10 @@ namespace dziennik
 
             return this.Imie.CompareTo(other.Imie);
         }
+
+        public virtual string PobierzInformacje()
+        {
+            return $"{Imie} {Nazwisko} (PESEL: {Pesel})";
+        }
     }
 }

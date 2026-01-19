@@ -34,6 +34,11 @@ namespace dziennik
         {
             return base.CompareTo(other);
         }
+
+        public override string PobierzInformacje()
+        {
+            return $"[Prowadzący] {tytulNaukowy} {base.PobierzInformacje()}";
+        }
     }
 
     internal class ProwadzacyTytulComparer : IComparer<Prowadzacy>
