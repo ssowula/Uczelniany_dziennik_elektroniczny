@@ -6,10 +6,13 @@ namespace DziennikGUI
 {
     public partial class OknoDziekanat : Window
     {
-        Uczelnia uczelnia = new Uczelnia();
-        public OknoDziekanat()
+        Uczelnia uczelnia;
+
+        public OknoDziekanat(Uczelnia u)
         {
             InitializeComponent();
+            this.uczelnia = u;
+            OdswiezListeStudentow();
         }
 
         private void ButtonDodaj_Click(object sender, RoutedEventArgs e)
@@ -21,16 +24,12 @@ namespace DziennikGUI
                 string pesel = txtPesel.Text;
 
                 Student nowyStudent = new Student(imie, nazwisko, pesel);
-
                 uczelnia.DodajStudenta(nowyStudent);
 
-                OdswiezListe();
+                OdswiezListeStudentow();
+                WyczyscPola();
 
-                txtImie.Clear();
-                txtNazwisko.Clear();
-                txtPesel.Clear();
-
-                MessageBox.Show("Dodano studenta!", "Sukces");
+                MessageBox.Show("Dodano studenta", "Sukces");
             }
             catch (Exception ex)
             {
@@ -38,14 +37,27 @@ namespace DziennikGUI
             }
         }
 
-        private void OdswiezListe()
+        private void OdswiezListeStudentow()
         {
             listaStudentow.Items.Clear();
-
-            foreach (var student in uczelnia.Studenci)
+            foreach (var s in uczelnia.Studenci)
             {
-                listaStudentow.Items.Add(student.PobierzInformacje());
+                listaStudentow.Items.Add(s.PobierzInformacje());
             }
+        }
+
+        private void WyczyscPola()
+        {
+            txtImie.Clear();
+            txtNazwisko.Clear();
+            txtPesel.Clear();
+        }
+
+        private void MenuWyloguj_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow logowanie = new MainWindow();
+            logowanie.Show();
+            this.Close();
         }
     }
 }

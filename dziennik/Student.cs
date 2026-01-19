@@ -27,6 +27,7 @@ namespace dziennik
 
         public Student(string imie, string nazwisko, string pesel) : base(licznik_studenci,imie,nazwisko,pesel)
         {
+            przedmiotyOceny = new List<PrzedmiotOceny>();
             NumerAlbumu = utworz_album();
             licznik_studenci++;
         }
