@@ -16,7 +16,7 @@ namespace dziennik
         DoktorHabilitowany,
         Profesor
     }
-    public class Prowadzacy : Osoba, IComparable<Prowadzacy>
+    public class Prowadzacy : Osoba, IComparable<Prowadzacy>, IEquatable<Prowadzacy>
     {
         EnumTytulNaukowy tytulNaukowy;
         static int licznik_prowadzacy = 1;
@@ -40,6 +40,30 @@ namespace dziennik
         {
             return $"[Prowadzący] {tytulNaukowy} {base.PobierzInformacje()}";
         }
+
+        public bool Equals(Prowadzacy? other)
+        {
+            if(other == null) return false;
+            return this.Pesel == other.Pesel;
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj is Prowadzacy other)
+            {
+                return this.Equals(other);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return Pesel.GetHashCode();
+        }
+
+        
     }
 
     internal class ProwadzacyTytulComparer : IComparer<Prowadzacy>

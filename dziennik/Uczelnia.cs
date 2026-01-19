@@ -23,11 +23,26 @@ namespace dziennik
         }
         public void DodajKierunek(Kierunek kierunek)
         {
-            Kierunki.Add(kierunek);
+            bool istnieje = Kierunki.Any(k => k.NazwaKierunku.Equals(kierunek.NazwaKierunku, StringComparison.OrdinalIgnoreCase));
+            if (!istnieje)
+            {
+                Kierunki.Add(kierunek);
+            }
+            else
+            {
+                throw new Exception($"Kierunek o nazwie {kierunek.NazwaKierunku} już istnieje w systemie!");
+            }
         }
         public void UsunKierunek(Kierunek kierunek)
         {
-            Kierunki.Remove(kierunek);
+            if(Kierunki.Remove(kierunek))
+            {
+                Kierunki.Remove(kierunek);
+            }
+            else
+            {
+                throw new Exception($"Kierunek o nazwie {kierunek.NazwaKierunku} nie istnieje w systemie!");
+            }
         }
         public void DodajStudenta(Student student)
         {
@@ -56,11 +71,25 @@ namespace dziennik
         }
         public void DodajProwadzacego(Prowadzacy prowadzacy)
         {
-            Prowadzacy.Add(prowadzacy);
+            if(!Prowadzacy.Contains(prowadzacy))
+            {
+                Prowadzacy.Add(prowadzacy);
+            }
+            else
+            {
+                throw new Exception($"Prowadzący o numerze Pesel {prowadzacy.Pesel} już istnieje w systemie!");
+            }
         }
         public void UsunProwadzacego(Prowadzacy prowadzacy)
         {
-            Prowadzacy.Remove(prowadzacy);
+            if (Prowadzacy.Contains(prowadzacy))
+            {
+                Prowadzacy.Remove(prowadzacy);
+            }
+            else
+            {
+                throw new Exception($"Prowadzący o numerze Pesel {prowadzacy.Pesel} nie istnieje w systemie!");
+            }
         }
         public void SortujStudentow()
         {
