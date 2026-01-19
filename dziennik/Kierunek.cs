@@ -31,11 +31,32 @@ namespace dziennik
 
         public void DodajSemestr(Semestr semestr)
         {
-            Semestry.Add(semestr);
+            
+            bool istnieje = Semestry.Any(s => s.RokAkademicki == semestr.RokAkademicki && s.Typ == semestr.Typ);
+
+            if (istnieje)
+            {
+                throw new Exception($"Semestr {semestr.Typ} {semestr.RokAkademicki} już istnieje na tym kierunku!");
+            }
+            else
+            {
+                Semestry.Add(semestr);
+            }
         }
+
         public void UsunSemestr(Semestr semestr)
         {
-            Semestry.Remove(semestr);
+            
+            var doUsuniecia = Semestry.FirstOrDefault(s => s.RokAkademicki == semestr.RokAkademicki && s.Typ == semestr.Typ);
+
+            if (doUsuniecia != null)
+            {
+                Semestry.Remove(doUsuniecia);
+            }
+            else
+            {
+                throw new Exception($"Semestr {semestr.Typ} {semestr.RokAkademicki} nie został znaleziony!");
+            }
         }
 
     }

@@ -35,9 +35,11 @@ namespace dziennik
         }
         public void UsunKierunek(Kierunek kierunek)
         {
-            if(Kierunki.Remove(kierunek))
+            var doUsuniecia = Kierunki.FirstOrDefault(k => k.NazwaKierunku.Equals(kierunek.NazwaKierunku, StringComparison.OrdinalIgnoreCase));
+
+            if (doUsuniecia != null)
             {
-                Kierunki.Remove(kierunek);
+                Kierunki.Remove(doUsuniecia); 
             }
             else
             {

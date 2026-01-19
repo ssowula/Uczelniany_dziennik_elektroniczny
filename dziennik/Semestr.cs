@@ -33,11 +33,33 @@ namespace dziennik
         }
         public void DodajPrzedmiot(Przedmiot przedmiot)
         {
-            Przedmioty.Add(przedmiot);
+            
+            bool istnieje = Przedmioty.Any(p => p.Nazwa.Equals(przedmiot.Nazwa, StringComparison.OrdinalIgnoreCase));
+
+            if (istnieje)
+            {
+                throw new Exception($"Przedmiot o nazwie {przedmiot.Nazwa} już istnieje na tym semestrze!");
+            }
+            else
+            {
+                Przedmioty.Add(przedmiot);
+                
+            }
         }
+
         public void UsunPrzedmiot(Przedmiot przedmiot)
         {
-            Przedmioty.Remove(przedmiot);
+            
+            var doUsuniecia = Przedmioty.FirstOrDefault(p => p.Nazwa.Equals(przedmiot.Nazwa, StringComparison.OrdinalIgnoreCase));
+
+            if (doUsuniecia != null)
+            {
+                Przedmioty.Remove(doUsuniecia);
+            }
+            else
+            {
+                throw new Exception($"Przedmiot o nazwie {przedmiot.Nazwa} nie istnieje na tym semestrze!");
+            }
         }
     }
 
