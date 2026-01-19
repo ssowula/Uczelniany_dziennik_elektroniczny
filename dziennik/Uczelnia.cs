@@ -23,11 +23,26 @@ namespace dziennik
         }
         public void DodajKierunek(Kierunek kierunek)
         {
-            Kierunki.Add(kierunek);
+            bool istnieje = Kierunki.Any(k => k.NazwaKierunku.Equals(kierunek.NazwaKierunku, StringComparison.OrdinalIgnoreCase));
+            if (!istnieje)
+            {
+                Kierunki.Add(kierunek);
+            }
+            else
+            {
+                throw new Exception($"Kierunek o nazwie {kierunek.NazwaKierunku} już istnieje w systemie!");
+            }
         }
         public void UsunKierunek(Kierunek kierunek)
         {
-            Kierunki.Remove(kierunek);
+            if(Kierunki.Remove(kierunek))
+            {
+                Kierunki.Remove(kierunek);
+            }
+            else
+            {
+                throw new Exception($"Kierunek o nazwie {kierunek.NazwaKierunku} nie istnieje w systemie!");
+            }
         }
         public void DodajStudenta(Student student)
         {
