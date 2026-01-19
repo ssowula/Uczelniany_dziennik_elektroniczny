@@ -37,7 +37,7 @@ namespace dziennik
             }
             else
             {
-                Console.WriteLine($"Student o numerze Pesel {student.Pesel} już istnieje w systemie!");
+                Console.WriteLine($"Student o numerze Pesel {student.NumerAlbumu} już istnieje w systemie!");
             }
                
         }
@@ -49,7 +49,7 @@ namespace dziennik
             }
             else
             {
-                Console.WriteLine($"Student o numerze Pesel {student.Pesel} nie istnieje w systemie!");
+                Console.WriteLine($"Student o Numerze Albumu {student.NumerAlbumu} nie istnieje w systemie!");
             }
                 
         }

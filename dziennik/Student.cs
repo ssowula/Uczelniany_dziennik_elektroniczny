@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    public class Student : Osoba, IComparable<Student>, IEquatable<Student>, ICloneable
+    public class Student : Osoba, IComparable<Student>, IEquatable<Student>, ICloneable, IRaportowalny
     {
         static int licznik_studenci = 1;
         string numerAlbumu;
@@ -84,7 +84,7 @@ namespace dziennik
         public bool Equals(Student? other)
         {
             if(other == null) return false;
-            return this.Pesel == other.Pesel;
+            return this.NumerAlbumu == other.NumerAlbumu;
         }
 
         public object Clone()
@@ -108,6 +108,22 @@ namespace dziennik
             return kopia;
         }
 
-
+        public string GenerujRaport()
+        {
+            StringBuilder sb = new StringBuilder(); 
+            sb.AppendLine($" ==== RAPORT ==== ");
+            sb.AppendLine($"{PobierzInformacje()}");
+            sb.AppendLine(" == OCENY == ");
+            foreach (var po in przedmiotyOceny)
+            {
+                sb.AppendLine($"Przedmiot: {po.Przedmiot.Nazwa}");
+                foreach (var ocena in po.Oceny)
+                {
+                    sb.AppendLine($" - Ocena: {ocena.Wartosc}");
+                }
+                sb.AppendLine("----------------");
+            }
+            return sb.ToString();
+        }
     }
 }

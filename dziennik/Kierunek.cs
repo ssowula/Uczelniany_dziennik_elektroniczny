@@ -29,5 +29,14 @@ namespace dziennik
             
         }
 
+        public void DodajSemestr(Semestr semestr)
+        {
+            Semestry.Add(semestr);
+        }
+        public void UsunSemestr(Semestr semestr)
+        {
+            Semestry.Remove(semestr);
+        }
+
     }
 }
