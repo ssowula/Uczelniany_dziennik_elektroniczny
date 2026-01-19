@@ -13,7 +13,7 @@ namespace dziennik
         string nazwaKierunku;
         List<Semestr> semestry;
 
-        public int IdKierunku { get => idKierunku; }
+        public int IdKierunku { get => idKierunku; set => idKierunku = value; }
         public string NazwaKierunku { get => nazwaKierunku; set => nazwaKierunku = value; }
         public List<Semestr> Semestry { get => semestry; set => semestry = value; }
 
@@ -27,6 +27,15 @@ namespace dziennik
             this.idKierunku = licznikKierunku++;
             NazwaKierunku = nazwaKierunku;
             
+        }
+
+        public void DodajSemestr(Semestr semestr)
+        {
+            Semestry.Add(semestr);
+        }
+        public void UsunSemestr(Semestr semestr)
+        {
+            Semestry.Remove(semestr);
         }
 
     }

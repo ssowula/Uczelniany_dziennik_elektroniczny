@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    public class Dziekanat
+    public interface IRaportowalny
     {
-        
+        string GenerujRaport();
     }
 }
