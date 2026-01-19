@@ -84,7 +84,7 @@ namespace dziennik
         public bool Equals(Student? other)
         {
             if(other == null) return false;
-            return this.NumerAlbumu == other.NumerAlbumu;
+            return this.Pesel == other.Pesel;
         }
 
         public object Clone()
@@ -107,5 +107,7 @@ namespace dziennik
             }
             return kopia;
         }
+
+
     }
 }

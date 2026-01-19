@@ -31,11 +31,27 @@ namespace dziennik
         }
         public void DodajStudenta(Student student)
         {
-            Studenci.Add(student);
+            if (!Studenci.Contains(student))
+            {
+                Studenci.Add(student);
+            }
+            else
+            {
+                Console.WriteLine($"Student o numerze Pesel {student.Pesel} już istnieje w systemie!");
+            }
+               
         }
         public void UsunStudenta(Student student)
         {
-            Studenci.Remove(student);
+            if (Studenci.Contains(student))
+            {
+                Studenci.Remove(student);
+            }
+            else
+            {
+                Console.WriteLine($"Student o numerze Pesel {student.Pesel} nie istnieje w systemie!");
+            }
+                
         }
         public void DodajProwadzacego(Prowadzacy prowadzacy)
         {
