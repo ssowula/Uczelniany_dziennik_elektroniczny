@@ -1,30 +1,55 @@
-﻿using System.Text;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using dziennik;
 
 namespace DziennikGUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+  
+        Uczelnia uczelnia = new Uczelnia();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void ButtonDodaj_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string imie = txtImie.Text;
+                string nazwisko = txtNazwisko.Text;
+                string pesel = txtPesel.Text;
 
+                Student nowyStudent = new Student(imie, nazwisko, pesel);
+
+                uczelnia.DodajStudenta(nowyStudent);
+
+                OdswiezListe();
+                WyczyscPola();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Błąd: {ex.Message}", "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        void OdswiezListe()
+        {
+            listaStudentow.Items.Clear();
+            foreach (var student in uczelnia.Studenci)
+            {
+                listaStudentow.Items.Add(student.PobierzInformacje());
+            }
+        }
+
+        void WyczyscPola()
+        {
+            txtImie.Clear();
+            txtNazwisko.Clear();
+            txtPesel.Clear();
         }
     }
 }

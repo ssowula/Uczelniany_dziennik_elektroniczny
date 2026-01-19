@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dziennik
 {
-    internal class Uczelnia
+    public class Uczelnia
     {
         List<Kierunek> kierunki;
         List<Student> studenci;
