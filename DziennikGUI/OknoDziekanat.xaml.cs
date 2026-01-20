@@ -77,101 +77,112 @@ namespace DziennikGUI
             try
             {
                 string nazwa = txtNazwaPrzedmiotu.Text;
+                if (string.IsNullOrWhiteSpace(nazwa)) throw new Exception("Podaj nazwę przedmiotu");
 
-                // Walidacja ECTS
-                if (!int.TryParse(txtEcts.Text, out int ects))
-                    throw new Exception("Punkty ECTS muszą być liczbą całkowitą.");
+                if (!int.TryParse(txtEcts.Text, out int ects)) throw new Exception("ECTS musi być liczbą");
 
-                // Pobranie prowadzącego z ComboBoxa
-                if (cmbProwadzacy.SelectedItem is not Prowadzacy wybranyProwadzacy)
-                    throw new Exception("Wybierz prowadzącego przedmiot.");
+                if (cmbProwadzacy.SelectedItem == null) throw new Exception("Wybierz prowadzącego");
+                Prowadzacy wybranyProwadzacy = (Prowadzacy)cmbProwadzacy.SelectedItem;
 
-                // Tworzenie przedmiotu
-                Przedmiot nowyPrzedmiot = new Przedmiot(nazwa, wybranyProwadzacy, ects);
+                Przedmiot p = new Przedmiot(nazwa, wybranyProwadzacy, ects);
 
-                // Dodanie do aktualnie tworzonego semestru
-                _aktualnieTworzonySemestr.DodajPrzedmiot(nowyPrzedmiot);
+                _aktualnieTworzonySemestr.DodajPrzedmiot(p);
 
-                // Aktualizacja widoku (np. ListBox pokazujący przedmioty w obecnym semestrze)
-                OdswiezPodgladPrzedmiotowWSemestrze();
+                listaPrzedmiotow.ItemsSource = null;
+                listaPrzedmiotow.ItemsSource = _aktualnieTworzonySemestr.Przedmioty;
 
-                // Wyczyszczenie pól przedmiotu
                 txtNazwaPrzedmiotu.Clear();
                 txtEcts.Clear();
-                cmbProwadzacy.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Błąd dodawania przedmiotu", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-
-            private void Button_DodajSemestrClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!int.TryParse(txtRokAkademicki.Text, out int rok))
-                    throw new Exception("Rok akademicki musi być liczbą.");
-
-                if (cmbTypSemestru.SelectedItem == null)
-                    throw new Exception("Wybierz typ semestru.");
-
-                // Ustawienie danych semestru
-                _aktualnieTworzonySemestr.RokAkademicki = rok;
-                _aktualnieTworzonySemestr.Typ = (EnumTyp)cmbTypSemestru.SelectedItem;
-
-                // Sprawdzenie czy taki semestr już nie został dodany do listy tymczasowej
-                bool istnieje = _tymczasoweSemestryKierunku.Any(s =>
-                    s.RokAkademicki == _aktualnieTworzonySemestr.RokAkademicki &&
-                    s.Typ == _aktualnieTworzonySemestr.Typ);
-
-                if (istnieje)
-                    throw new Exception("Taki semestr został już dodany do listy.");
-
-                // Dodanie gotowego semestru do listy tymczasowej
-                _tymczasoweSemestryKierunku.Add(_aktualnieTworzonySemestr);
-
-                // Ważne: Tworzymy NOWĄ instancję dla kolejnego semestru, aby nie nadpisywać starego
-                _aktualnieTworzonySemestr = new Semestr();
-
-                // Odświeżenie widoku (ListBox pokazujący dodane semestry)
-                OdswiezPodgladSemestrowTworzonych();
-                OdswiezPodgladPrzedmiotowWSemestrze(); // Czyści widok przedmiotów, bo nowy semestr jest pusty
-
-                MessageBox.Show("Dodano semestr do kierunku.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Błąd dodawania semestru", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void OdswiezlisteSemestrow()
+        private void ButtonDodajSemestr_Click(object sender, RoutedEventArgs e)
         {
-            listaSemestrow.Items.Clear();
-            if (listaKierunkow.SelectedIndex > -1)
+            try
             {
-                Kierunek wybranyKierunek = uczelnia.Kierunki[listaKierunkow.SelectedIndex];
-                foreach (var s in wybranyKierunek.Semestry)
-                {
-                    listaSemestrow.Items.Add(s.PobierzInformacjeS());
-                }
+                if (!int.TryParse(txtRokAkademicki.Text, out int rok)) throw new Exception("Podaj poprawny rok");
+                if (cmbTypSemestru.SelectedItem == null) throw new Exception("Wybierz typ semestru");
+
+                _aktualnieTworzonySemestr.RokAkademicki = rok;
+                _aktualnieTworzonySemestr.Typ = (EnumTyp)cmbTypSemestru.SelectedItem;
+
+                _tymczasoweSemestryKierunku.Add(_aktualnieTworzonySemestr);
+
+                MessageBox.Show($"Dodano semestr {_aktualnieTworzonySemestr.Typ} {rok} do bufora kierunku.");
+
+                _aktualnieTworzonySemestr = new Semestr();
+                listaPrzedmiotow.ItemsSource = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void Button_ZapiszKierunek_Click(object sender, RoutedEventArgs e)
         {
             string nazwaKierunku = txtNazwaKierunku.Text;
-            if(!string.IsNullOrWhiteSpace(nazwaKierunku))
-            {
-                Kierunek nowyKierunek = new Kierunek(nazwaKierunku);
-                uczelnia.DodajKierunek(nowyKierunek);
-                OdswiezlisteKierunkow();
-                txtNazwaKierunku.Clear();
-                MessageBox.Show("Dodano kierunek", "Sukces");
-            }
-            else
+
+            if (string.IsNullOrWhiteSpace(nazwaKierunku))
             {
                 MessageBox.Show("Nazwa kierunku nie może być pusta", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_tymczasoweSemestryKierunku.Count == 0)
+            {
+                var decyzja = MessageBox.Show("Dodajesz kierunek bez semestrów. Czy na pewno?", "Pusty kierunek", MessageBoxButton.YesNo);
+                if (decyzja == MessageBoxResult.No) return;
+            }
+
+            Kierunek nowyKierunek = new Kierunek(nazwaKierunku);
+
+            foreach (var semestr in _tymczasoweSemestryKierunku)
+            {
+                try
+                {
+                    nowyKierunek.DodajSemestr(semestr);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Błąd przy dodawaniu semestru: {ex.Message}");
+                }
+            }
+
+            uczelnia.DodajKierunek(nowyKierunek);
+
+            _tymczasoweSemestryKierunku.Clear();
+            _aktualnieTworzonySemestr = new Semestr();
+            txtNazwaKierunku.Clear();
+            txtRokAkademicki.Clear();
+
+            OdswiezlisteKierunkow(); 
+            OdswiezPodgladSemestrowTworzonych(); 
+
+            MessageBox.Show("Dodano kierunek wraz z semestrami i przedmiotami", "Sukces");
+        }
+        private void OdswiezlisteKierunkow()
+        {
+            ListaKierunkow.Clear();
+            foreach (var k in uczelnia.Kierunki)
+            {
+                ListaKierunkow.Add(k);
+            }
+        }
+
+        private void OdswiezPodgladSemestrowTworzonych()
+        {
+            listaSemestrow.Items.Clear();
+
+            foreach (Semestr s in _tymczasoweSemestryKierunku)
+            {
+                string opis = $"{s.PobierzInformacjeS()} (Przedmiotów: {s.Przedmioty.Count})";
+
+                listaSemestrow.Items.Add(opis);
             }
         }
     }
