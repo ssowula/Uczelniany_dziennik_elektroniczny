@@ -5,8 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DziennikGUI"
         mc:Ignorable="d"
-        Title="OknoProwadzacy" Height="450" Width="800">
-    <Grid>
-        
+        Title="Informacje dla Prowadzącego" Height="600" Width="1000" Background="#FFEAECEF">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Lewa kolumna -->
+        <StackPanel Grid.Column="0">
+            <!-- Karta prowadzącego -->
+            <Border Background="White" CornerRadius="8" Padding="20 15" Margin="0,0,10,15">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="Prowadzący:" FontSize="13" Foreground="Gray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding TytulNaukowy}" FontSize="13" Foreground="#555" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                    <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="Black" HorizontalAlignment="Center" Margin="0,8,0,12">
+                        <Run Text="{Binding Imie}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding Nazwisko}"/>
+                    </TextBlock>
+
+                    <Separator Background="#E0E0E0" Margin="0,5,0,10"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="PESEL: " FontSize="12" Foreground="Gray"/>
+                        <TextBlock Text="{Binding Pesel}" FontSize="12" Foreground="#333" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Twoje Przedmioty z ScrollViewerem -->
+            <Border Background="White" CornerRadius="8" Padding="15" Margin="0,0,10,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Twoje Przedmioty" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" Grid.Row="0"/>
+
+                    <!-- ScrollViewer dla listy przedmiotów -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="350">
+                        <ListBox x:Name="listaPrzedmiotow" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F5F5F7" CornerRadius="6" Padding="12" Margin="0,0,0,8" Cursor="Hand" Width="300">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Przedmiot.Nazwa}" FontWeight="Bold" FontSize="14" Foreground="#222"/>
+                                            <TextBlock Text="{Binding Kierunek.NazwaKierunku}" FontSize="11" Foreground="Gray" Margin="0,4,0,0"/>
+                                            <TextBlock FontSize="11" Foreground="#666" Margin="0,2,0,0">
+                                                <Run Text="{Binding Semestr.Typ, Mode=OneWay}"/>
+                                                <Run Text=" "/>
+                                                <Run Text="{Binding Semestr.RokAkademicki, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <!-- Prawa kolumna - Szczegóły przedmiotu -->
+        <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Nagłówek -->
+                <TextBlock Text="Szczegóły przedmiotu" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15" Grid.Row="0"/>
+
+                
+            </Grid>
+        </Border>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dziennik;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,32 @@ namespace DziennikGUI
     /// </summary>
     public partial class OknoProwadzacy : Window
     {
-        public OknoProwadzacy()
+        private Prowadzacy zalogowanyProwadzacy;
+        private Uczelnia uczelnia;
+        public OknoProwadzacy(Prowadzacy prowadzacy, Uczelnia uczelnia)
         {
             InitializeComponent();
+            zalogowanyProwadzacy = prowadzacy;
+            this.DataContext = zalogowanyProwadzacy;
+            this.uczelnia = uczelnia;
+            odswiezListePrzedmiotow();
+        }
+
+        public void WyswietlProwadzacego()
+        {
+            if (zalogowanyProwadzacy != null)
+            {
+
+            }
+        }
+
+        public void odswiezListePrzedmiotow()
+        {
+            if (zalogowanyProwadzacy != null && uczelnia != null)
+            {
+                var przedmioty = zalogowanyProwadzacy.ZnajdzPrzedmiotyProwadzacego(uczelnia);
+                listaPrzedmiotow.ItemsSource = przedmioty;
+            }
         }
     }
 }

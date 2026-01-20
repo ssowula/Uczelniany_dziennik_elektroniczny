@@ -27,12 +27,12 @@
                     <Button Content="Dodaj Studenta" Click="ButtonDodaj_Click" Margin="0,15" Padding="5" Background="#DDDDDD"/>
 
                     <ComboBox x:Name="cmbKierunkow" Margin="0,15" Padding="5"/>
-                    <Button Content="Przypisz do kierunku"  Click="btnPrzypisz_Click" Margin="0,15" Padding="5" Background="#DDDDDD" />
+                    <Button Content="Przypisz do kierunku" Margin="0,15" Padding="5" Background="#DDDDDD" />
                 </StackPanel>
 
                 <DockPanel Grid.Column="1">
                     <TextBlock DockPanel.Dock="Top" Text="Baza studentów:" FontWeight="SemiBold"/>
-                    <ListBox x:Name="listaStudentow" Margin="0,5,0,0" SelectionChanged="listaStudentow_SelectionChanged"/>
+                    <ListBox x:Name="listaStudentow" Margin="0,5,0,0"/>
                 </DockPanel>
             </Grid>
         </TabItem>
@@ -51,7 +51,7 @@
                 <GroupBox Header="Dane Kierunku" Grid.Row="0" Padding="5">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Nazwa kierunku:"/>
-                        <TextBox Width="440" Margin="5,0" x:Name="txtNazwaKierunku" TextChanged="txtNazwaKierunku_TextChanged"/>
+                        <TextBox Width="440" Margin="5,0" x:Name="txtNazwaKierunku"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -63,7 +63,7 @@
 
                     <DockPanel Grid.Column="0" LastChildFill="True">
                         <Label Content="Lista Semestrów" DockPanel.Dock="Top" FontWeight="Bold"/>
-                        <Button Content="Dodaj Semestr" DockPanel.Dock="Bottom" Height="30" Click="Button_DodajSemestrClick"/>
+                        <Button Content="Dodaj Semestr" DockPanel.Dock="Bottom" Height="30" Click="ButtonDodajSemestr_Click"/>
 
                         <ListBox x:Name="listaSemestrow"
              Margin="0,0,5,0">
@@ -147,8 +147,8 @@
                 </Grid>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="Button_AnulujKierunek_Click" Content="Anuluj" Width="100" Height="30" Margin="5"/>
-                    <Button x:Name="Button_ZapiszKierunek_Click" Content="Zapisz Kierunek" Width="100" Height="30" Margin="5" Click="Button_ZapiszKierunek_Click"/>
+                    <Button x:Name="btnAnulujKierunek" Content="Anuluj" Width="100" Height="30" Margin="5"/>
+                    <Button x:Name="btnZapiszKierunek" Content="Zapisz Kierunek" Width="100" Height="30" Margin="5" Click="Button_ZapiszKierunek_Click"/>
                 </StackPanel>
             </Grid>
         </TabItem>

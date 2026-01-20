@@ -16,6 +16,7 @@ namespace dziennik
         DoktorHabilitowany,
         Profesor
     }
+
     public class Prowadzacy : Osoba, IComparable<Prowadzacy>, IEquatable<Prowadzacy>
     {
         EnumTytulNaukowy tytulNaukowy;
@@ -63,7 +64,24 @@ namespace dziennik
             return Pesel.GetHashCode();
         }
 
-        
+       public List<ProwadzonyPrzedmiot> ZnajdzPrzedmiotyProwadzacego(Uczelnia uczelnia)
+       {
+            List<ProwadzonyPrzedmiot> znalezionePrzedmioty = new List<ProwadzonyPrzedmiot>();
+            foreach(var kierunek in uczelnia.Kierunki)
+            {
+                foreach(var semestr in kierunek.Semestry)
+                {
+                    foreach(var przedmiot in semestr.Przedmioty)
+                    {
+                        if(przedmiot.Prowadzacy != null && przedmiot.Prowadzacy.Equals(this))
+                        {
+                            znalezionePrzedmioty.Add(new ProwadzonyPrzedmiot(kierunek, semestr, przedmiot));
+                        }
+                    }
+                }
+            }
+            return znalezionePrzedmioty;
+       } 
     }
 
     internal class ProwadzacyTytulComparer : IComparer<Prowadzacy>

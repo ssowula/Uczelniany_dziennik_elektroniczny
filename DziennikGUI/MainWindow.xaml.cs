@@ -50,7 +50,7 @@ namespace DziennikGUI
             var prowadzacy = uczelnia.Prowadzacy.FirstOrDefault(p => p.Nazwisko == login && p.Pesel == haslo);
             if (prowadzacy != null)
             {
-                OknoDziekanat okno = new OknoDziekanat(uczelnia);
+                OknoProwadzacy okno = new OknoProwadzacy(prowadzacy, uczelnia);
                 okno.Show();
                 this.Close();
                 return;

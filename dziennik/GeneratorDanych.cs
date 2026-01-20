@@ -18,7 +18,24 @@ namespace dziennik
 
             Przedmiot matma = new Przedmiot("Matematyka", p1, 5);
             Przedmiot prog = new Przedmiot("Programowanie Obiektowe", p2, 6);
+            Przedmiot analiz = new Przedmiot("Analiza Matematyczna", p1, 5);
             Przedmiot bazy = new Przedmiot("Bazy Danych", p1, 4);
+
+            Kierunek informatyka = new Kierunek("Informatyka");
+            Kierunek zarządzanie = new Kierunek("Zarządzanie");
+
+            Semestr sem1_info = new Semestr(2024, EnumTyp.Zimowy);
+            sem1_info.DodajPrzedmiot(matma);
+            sem1_info.DodajPrzedmiot(prog);
+
+            Semestr sem2_info = new Semestr(2024, EnumTyp.Letni);
+            sem2_info.DodajPrzedmiot(bazy);
+
+            informatyka.DodajSemestr(sem1_info);
+            informatyka.DodajSemestr(sem2_info);
+
+            u.DodajKierunek(informatyka);
+            u.DodajKierunek(zarządzanie);
 
             Student s1 = new Student("Adam", "Testowy", "12312312310");
             u.DodajStudenta(s1);

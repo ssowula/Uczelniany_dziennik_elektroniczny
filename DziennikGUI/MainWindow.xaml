@@ -17,7 +17,7 @@
             <PasswordBox x:Name="txtHaslo" Height="35" Margin="0,0,0,25" Padding="5" FontSize="14"/>
 
             <Button Content="Zaloguj się" Height="45" Background="#007ACC" Foreground="White" 
-                    FontSize="16" FontWeight="Bold" Click="BtnZaloguj_Click"/>
+                    FontSize="16" FontWeight="Bold" Click="BtnZaloguj_Click" TouchEnter="BtnZaloguj_Click"/>
 
         </StackPanel>
     </Grid>
