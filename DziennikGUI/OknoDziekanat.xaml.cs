@@ -13,6 +13,9 @@ namespace DziennikGUI
             InitializeComponent();
             this.uczelnia = u;
             OdswiezListeStudentow();
+            OdswiezlisteKierunkow();
+            OdswiezlisteSemestrow();
+
         }
 
         private void ButtonDodaj_Click(object sender, RoutedEventArgs e)
@@ -45,7 +48,14 @@ namespace DziennikGUI
                 listaStudentow.Items.Add(s.PobierzInformacje());
             }
         }
-
+        private void OdswiezlisteKierunkow()
+        {
+            listaKierunkow.Items.Clear();
+            foreach (var k in uczelnia.Kierunki)
+            {
+                listaKierunkow.Items.Add(k.PobierzInformacje());
+            }
+        }
         private void WyczyscPola()
         {
             txtImie.Clear();
@@ -58,6 +68,25 @@ namespace DziennikGUI
             MainWindow logowanie = new MainWindow();
             logowanie.Show();
             this.Close();
+        }
+        private void Button_DodajKierunekClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string nazwakierunku
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show(ex.Message, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private void Button_DodajSemestrClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                
+            }
         }
     }
 }
