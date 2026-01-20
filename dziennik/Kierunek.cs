@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,9 @@ namespace dziennik
                 throw new Exception($"Semestr {semestr.Typ} {semestr.RokAkademicki} nie został znaleziony!");
             }
         }
-
+        public string PobierzInformacjeK()
+        {
+            return $"{NazwaKierunku}";
+        }
     }
 }

@@ -26,7 +26,7 @@
 
                     <Button Content="Dodaj Studenta" Click="ButtonDodaj_Click" Margin="0,15" Padding="5" Background="#DDDDDD"/>
 
-                    <ComboBox x:Name="cbKierunki" Margin="0,15" Padding="5" SelectionChanged="cbKierunki_SelectionChanged"/>
+                    <ComboBox x:Name="cmbKierunkow" Margin="0,15" Padding="5"/>
                     <Button Content="Przypisz do kierunku"  Click="btnPrzypisz_Click" Margin="0,15" Padding="5" Background="#DDDDDD" />
                 </StackPanel>
 
@@ -65,9 +65,8 @@
                         <Label Content="Lista Semestrów" DockPanel.Dock="Top" FontWeight="Bold"/>
                         <Button Content="Dodaj Semestr" DockPanel.Dock="Bottom" Height="30" Click="Button_DodajSemestrClick"/>
 
-                        <ListBox ItemsSource="{Binding Semestry}" 
-                         SelectedItem="{Binding WybranySemestr}" 
-                         Margin="0,0,5,0">
+                        <ListBox x:Name="listaSemestrow"
+             Margin="0,0,5,0">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Numer, StringFormat='Semestr {0}'}" FontWeight="Bold"/>
@@ -77,7 +76,7 @@
                     </DockPanel>
 
                     <GroupBox Header="Szczegóły Semestru" Grid.Column="1" 
-                      DataContext="{Binding WybranySemestr}">
+          DataContext="{Binding WybranySemestr}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -87,13 +86,13 @@
                             <StackPanel Grid.Row="0" Orientation="Vertical" Margin="5">
                                 <StackPanel Orientation="Horizontal" Margin="0,5">
                                     <Label Content="Rok Akademicki:" Width="100"/>
-                                    <TextBox Text="{Binding RokAkademicki}" Width="150"/>
+                                    <TextBox x:Name="txtRokAkademicki" Width="150"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,5">
                                     <Label Content="Rodzaj:" Width="100"/>
-                                    <ComboBox Width="150" Text="{Binding Rodzaj}">
-                                        <ComboBoxItem Content="Zimowy"/>
-                                        <ComboBoxItem Content="Letni"/>
+                                    <ComboBox x:Name="cmbTypSemestru" Width="150">
+                                        <ComboBoxItem x:Name="Z" >Zimowy</ComboBoxItem>
+                                        <ComboBoxItem x:Name="L">Letni</ComboBoxItem>
                                     </ComboBox>
                                 </StackPanel>
                             </StackPanel>
@@ -119,7 +118,7 @@
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button x:Name="Button_AnulujKierunek_Click" Content="Anuluj" Width="100" Height="30" Margin="5"/>
-                    <Button x:Name="Button_ZapiszKierunek_Click" Content="Zapisz Kierunek" Width="100" Height="30" Margin="5"/>
+                    <Button x:Name="Button_ZapiszKierunek_Click" Content="Zapisz Kierunek" Width="100" Height="30" Margin="5" Click="Button_ZapiszKierunek_Click"/>
                 </StackPanel>
             </Grid>
         </TabItem>

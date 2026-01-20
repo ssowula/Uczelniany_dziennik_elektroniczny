@@ -61,6 +61,10 @@ namespace dziennik
                 throw new Exception($"Przedmiot o nazwie {przedmiot.Nazwa} nie istnieje na tym semestrze!");
             }
         }
+        public string PobierzInformacjeS()
+        {
+            return $"Rok akademicki: {RokAkademicki}, Typ: {Typ}";
+        }
     }
 
 }
