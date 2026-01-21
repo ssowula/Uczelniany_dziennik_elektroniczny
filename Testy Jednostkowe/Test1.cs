@@ -84,4 +84,39 @@ namespace Testy_Jednostkowe
 
         }
     }
+
+    [TestClass]
+    public sealed class ProwadzacyTest
+    {
+        [TestMethod]
+        public void TestZnajdzPrzedmiotyProwadzacego()
+        {
+            Uczelnia uczelnia = new Uczelnia();
+
+            var szukanyProwadzacy = new Prowadzacy("Jan", "Kowalski", "11111111111", EnumTytulNaukowy.Doktor);
+            var innyProwadzacy = new Prowadzacy("Anna", "Nowak", "22222222222", EnumTytulNaukowy.Magister);
+
+            var p1 = new Przedmiot("Matematyka", szukanyProwadzacy, 5);
+            var p2 = new Przedmiot("Fizyka", innyProwadzacy, 3);
+            var p3 = new Przedmiot("Informatyka", szukanyProwadzacy, 4);
+
+            var semestr = new Semestr(2024, EnumTyp.Zimowy);
+            semestr.DodajPrzedmiot(p1);
+            semestr.DodajPrzedmiot(p2);
+            semestr.DodajPrzedmiot(p3);
+
+            var kierunek = new Kierunek("Informatyka");
+            kierunek.DodajSemestr(semestr);
+
+            uczelnia.DodajKierunek(kierunek);
+
+            var test = szukanyProwadzacy.ZnajdzPrzedmiotyProwadzacego(uczelnia);
+
+            Assert.AreEqual(2, test.Count);
+
+            Assert.IsTrue(test.Any(x => x.Przedmiot.Nazwa == "Matematyka"));
+            Assert.IsTrue(test.Any(x => x.Przedmiot.Nazwa == "Informatyka"));
+            Assert.IsFalse(test.Any(x => x.Przedmiot.Nazwa == "Fizyka"));
+        }
+    }
 }
