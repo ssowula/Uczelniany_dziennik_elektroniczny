@@ -89,6 +89,43 @@ namespace DziennikGUI
                 }
             }
         }
+        private void ButtonPrzypisz_Cick(object sender, RoutedEventArgs e)
+        {
+            if (listaStudentow.SelectedIndex < 0 || cmbKierunkow.SelectedItem == null)
+            {
+                MessageBox.Show("Wybierz studenta i kierunek", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            try
+            {
+                int indeks = listaStudentow.SelectedIndex;
+                Student wybranyStudent = uczelnia.Studenci[indeks];
+                Kierunek wybranyKierunek = (Kierunek)cmbKierunkow.SelectedItem;
+                wybranyStudent.Kierunek = wybranyKierunek;
+                if (wybranyKierunek.Semestry.Count > 0)
+                {
+                    Semestr pierwszySemestr = wybranyKierunek.Semestry[0];
+
+                    int licznikPrzedmiotow = 0;
+
+                    foreach (var przedmiot in pierwszySemestr.Przedmioty)
+                    {
+                        try
+                        {
+                            wybranyStudent.DodajPrzedmiot(przedmiot);
+                            licznikPrzedmiotow++;
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    MessageBox.Show($"Przypisano kierunek {wybranyKierunek.NazwaKierunku} studentowi {wybranyStudent.Imie} {wybranyStudent.Nazwisko}", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void ButtonDodajPrzedmiot_Click(object sender, RoutedEventArgs e)
         {
             try

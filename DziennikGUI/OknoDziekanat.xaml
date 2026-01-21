@@ -90,11 +90,11 @@
                             <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
                                 <GroupBox Header="Dane nowego semestru">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                        <StackPanel Orientation="Horizontal" Margin="5" Width="250">
                                             <Label Content="Rok Akademicki:" Width="100"/>
                                             <TextBox x:Name="txtRokAkademicki" Width="150"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                        <StackPanel Orientation="Horizontal" Margin="5" Width="250">
                                             <Label Content="Typ semestru:" Width="100"/>
                                             <ComboBox x:Name="cmbTypSemestru" Width="150"/>
                                         </StackPanel>
@@ -104,24 +104,24 @@
 
                             <GroupBox Grid.Row="1" Header="Dodaj przedmiot do tego semestru" Margin="0,0,0,10">
                                 <StackPanel Margin="5">
-                                    <StackPanel Orientation="Horizontal" Margin="0,2">
+                                    <StackPanel Orientation="Horizontal" Margin="0,2" Width="250">
                                         <Label Content="Nazwa:" Width="80"/>
-                                        <TextBox x:Name="txtNazwaPrzedmiotu" Width="200"/>
+                                        <TextBox x:Name="txtNazwaPrzedmiotu" Width="170"/>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,2">
+                                    <StackPanel Orientation="Horizontal" Margin="0,2" Width="250">
                                         <Label Content="ECTS:" Width="80"/>
                                         <TextBox x:Name="txtEcts" Width="50"/>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,2">
+                                    <StackPanel Orientation="Horizontal" Margin="0,2" Width="250">
                                         <Label Content="Prowadzący:" Width="80"/>
-                                        <ComboBox x:Name="cmbProwadzacy" Width="200" DisplayMemberPath="Nazwisko"/>
+                                        <ComboBox x:Name="cmbProwadzacy" Width="170" DisplayMemberPath="Nazwisko"/>
                                     </StackPanel>
 
                                     <Button Content="Dodaj Przedmiot do Listy" 
                     Click="ButtonDodajPrzedmiot_Click" 
-                    Width="180" HorizontalAlignment="Left" Margin="80,10,0,0"/>
+                    Width="170" HorizontalAlignment="Left" Margin="80,10,3,3"/>
                                 </StackPanel>
                             </GroupBox>
 
