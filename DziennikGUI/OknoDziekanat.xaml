@@ -27,7 +27,9 @@
                     <Button Content="Dodaj Studenta" Click="ButtonDodaj_Click" Margin="0,15" Padding="5" Background="#DDDDDD"/>
 
                     <ComboBox x:Name="cmbKierunkow" Margin="0,15" Padding="5"/>
-                    <Button Content="Przypisz do kierunku" Margin="0,15" Padding="5" Background="#DDDDDD" />
+                    <Button Content="Przypisz do kierunku" Margin="0,15" Padding="5" Background="#DDDDDD"/>
+                    
+                    <Button Content="Generuj Raport o studencie" Margin="0,15" Padding="5" Background="#DDDDDD" Click="ButtonGenerujRaport_Click"/>
                 </StackPanel>
 
                 <DockPanel Grid.Column="1">

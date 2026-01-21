@@ -72,6 +72,23 @@ namespace DziennikGUI
             logowanie.Show();
             this.Close();
         }
+        private void ButtonGenerujRaport_Click(object sender, RoutedEventArgs e)
+        {
+            if(listaStudentow.SelectedIndex >= 0)
+            {
+                try
+                {
+                    int indeks = listaStudentow.SelectedIndex;
+                    Student wybranyStudent = uczelnia.Studenci[indeks];
+                    string trescRaportu = wybranyStudent.GenerujRaport();
+                    MessageBox.Show(trescRaportu, "Raport studenta", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
         private void ButtonDodajPrzedmiot_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -185,5 +202,7 @@ namespace DziennikGUI
                 listaSemestrow.Items.Add(opis);
             }
         }
+
+       
     }
 }
