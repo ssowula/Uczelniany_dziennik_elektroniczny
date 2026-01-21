@@ -81,7 +81,6 @@ namespace Testy_Jednostkowe
             double blednaOcena = 8.0;
 
             Assert.ThrowsException<NiepoprawnaOcenaException>(() => { var o1 = new Ocena(przedmiot, blednaOcena); });
-
         }
     }
 
@@ -117,6 +116,35 @@ namespace Testy_Jednostkowe
             Assert.IsTrue(test.Any(x => x.Przedmiot.Nazwa == "Matematyka"));
             Assert.IsTrue(test.Any(x => x.Przedmiot.Nazwa == "Informatyka"));
             Assert.IsFalse(test.Any(x => x.Przedmiot.Nazwa == "Fizyka"));
+        }
+    }
+
+    [TestClass]
+    public sealed class PrzedmiotOcenyTest
+    {
+        [TestMethod]
+        public void TestSredniaOcen()
+        {
+            var student = new Student("Adam", "Łukasik", "12345678911");
+            var prowadzacy = new Prowadzacy("Jacek", "Wolak", "11122233311", EnumTytulNaukowy.Doktor);
+            var przedmiot = new Przedmiot("Wstęp do analizy danych", prowadzacy, 6);
+
+            student.DodajPrzedmiot(przedmiot);
+
+            var przedmiotOceny = student.PrzedmiotyOceny.First(p => p.Przedmiot == przedmiot);
+
+            Assert.AreEqual(0.0, przedmiotOceny.SredniaOcen());
+
+            student.DodajOcene(przedmiot, 2.0);
+            student.DodajOcene(przedmiot, 3.0);
+            student.DodajOcene(przedmiot, 4.0);
+            student.DodajOcene(przedmiot, 5.0);
+            student.DodajOcene(przedmiot, 3.5);
+            student.DodajOcene(przedmiot, 4.5);
+
+            przedmiotOceny = student.PrzedmiotyOceny.First(p => p.Przedmiot == przedmiot);
+
+            Assert.AreEqual(22.0 / 6.0, przedmiotOceny.SredniaOcen(),0.001);
         }
     }
 }
