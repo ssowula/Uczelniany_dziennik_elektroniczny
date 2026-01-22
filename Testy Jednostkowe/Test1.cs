@@ -93,6 +93,28 @@ namespace Testy_Jednostkowe
             Assert.AreEqual(1, ocenyOryginalu.Count);
             Assert.AreEqual(2, ocenyKlona.Count);
         }
+
+        [TestMethod]
+        public void TestFormatowanieImieniaNazwiska()
+        {
+            
+            var s1 = new Student("adam", "kowalski", "12345678911");
+
+            Assert.AreEqual("Adam", s1.Imie);
+            Assert.AreEqual("Kowalski", s1.Nazwisko);
+
+            
+            var s2 = new Student("tOMASZ", "nOWAK", "98765432111");
+
+            Assert.AreEqual("Tomasz", s2.Imie);
+            Assert.AreEqual("Nowak", s2.Nazwisko);
+
+            
+            var s3 = new Student("  jan  ", "  z  ", "11122233344");
+
+            Assert.AreEqual("Jan", s3.Imie);
+            Assert.AreEqual("Z", s3.Nazwisko);
+        }
     }
 
     [TestClass]
@@ -302,7 +324,7 @@ namespace Testy_Jednostkowe
             uczelnia.DodajProwadzacego(pProf);
             uczelnia.DodajProwadzacego(pDr);
 
-            uczelnia.SortujProwadzacychPoTytule();
+            uczelnia.SortujProwadzacychPoTytule(false);
 
             Assert.AreEqual(EnumTytulNaukowy.Profesor, uczelnia.Prowadzacy[0].TytulNaukowy);
             Assert.AreEqual(EnumTytulNaukowy.Doktor, uczelnia.Prowadzacy[1].TytulNaukowy);
