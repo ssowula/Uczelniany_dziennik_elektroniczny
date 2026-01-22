@@ -108,5 +108,7 @@ namespace dziennik
             
             Prowadzacy.Sort(new ProwadzacyTytulComparer());
         }
+
+
     }
 }
