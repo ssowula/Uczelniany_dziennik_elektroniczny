@@ -93,6 +93,20 @@ namespace DziennikGUI
                 }
             }
         }
+        private void ButtonRaportXML_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {   string nazwaPliku = "Uczelnia.xml";
+                XMLFileManager.Zapisz(uczelnia, nazwaPliku);
+                string pelnaSciezka = System.IO.Path.GetFullPath(nazwaPliku);
+                MessageBox.Show($"Pomyślnie wygenerowano plik XML całej uczelni.\n\nLokalizacja:\n{pelnaSciezka}", "Sukces");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Błąd Zapisu :{ex.Message}", "Błąd");
+            }
+        }
         private void ButtonPrzypisz_Cick(object sender, RoutedEventArgs e)
         {
             if (listaStudentow.SelectedIndex < 0 || cmbKierunkow.SelectedItem == null)
