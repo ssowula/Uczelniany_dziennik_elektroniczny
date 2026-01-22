@@ -87,10 +87,12 @@ namespace DziennikGUI
             if (wybranyStudent == null)
             {
                 btnDodajOcene.IsEnabled = false;
+                btnEdytujOcene.IsEnabled = false;
             }
             else
             {
                 btnDodajOcene.IsEnabled = true;
+                btnEdytujOcene.IsEnabled = true;
             }
 
 
@@ -105,6 +107,24 @@ namespace DziennikGUI
 
             var oknoDodawaniaOceny = new OknoDodawaniaOceny(uczelnia, zalogowanyProwadzacy, wybranyStudent.NumerAlbumu, wybranyPrzedmiot.Przedmiot.Nazwa);
             oknoDodawaniaOceny.ShowDialog();
+
+            listaPrzedmiotow_SelectionChanged(null, null);
+        }
+
+        private void btnEdytuj_Ocene(object sender, RoutedEventArgs e)
+        {
+            var wybranyPrzedmiot = listaPrzedmiotow.SelectedItem as ProwadzonyPrzedmiot;
+            var wybranyStudent = listaStudentow.SelectedItem as StudentOcenyPrzedmiot;
+
+            if (wybranyPrzedmiot == null || wybranyStudent == null) return;
+
+            var prawdziwyStudent = uczelnia.Studenci.FirstOrDefault(s => s.NumerAlbumu == wybranyStudent.NumerAlbumu);
+            if (prawdziwyStudent == null) return;
+
+            var prawdziwyPrzedmiot = wybranyPrzedmiot.Przedmiot;
+
+            var oknoZarzadzaniaOcenami = new OknoZarzadzaniaOcenami(prawdziwyStudent, prawdziwyPrzedmiot);
+            oknoZarzadzaniaOcenami.ShowDialog();
 
             listaPrzedmiotow_SelectionChanged(null, null);
         }

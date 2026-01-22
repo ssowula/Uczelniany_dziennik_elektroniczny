@@ -77,6 +77,37 @@ namespace dziennik
             }
         }
 
+        public void UsunOcene(Przedmiot p, Ocena o)
+        {
+            var przedmiot = przedmiotyOceny.FirstOrDefault(x => x.Przedmiot == p);
+            if (przedmiot != null)
+            {
+                przedmiot.Oceny.Remove(o);
+            }
+        }
+
+        public double EdytujOcene(Przedmiot p, Ocena staraOcena, double nowaWartosc)
+        {
+            var przedmiot = przedmiotyOceny.FirstOrDefault(x => x.Przedmiot == p);
+            if (przedmiot != null)
+            {
+                var ocena = przedmiot.Oceny.FirstOrDefault(x => x == staraOcena);
+                if (ocena != null)
+                {
+                    ocena.Wartosc = nowaWartosc;
+                    return ocena.Wartosc;
+                }
+                else
+                {
+                    throw new Exception("Nie znaleziono podanej oceny");
+                }
+            }
+            else
+            {
+                throw new Exception("Student nie jest zapisany na ten przedmiot");
+            }
+        }
+
         public override string PobierzInformacje()
         {
             return $"[Student] {base.PobierzInformacje()}, numer albumu: {NumerAlbumu}";
