@@ -168,16 +168,28 @@ namespace dziennik
                 double srednia = po.SredniaOcen();
                 if(srednia > 0) {
                     sb.AppendLine($"Średnia ocen: {srednia:F2}");
+                    double ocenaKoncowa = Math.Round(srednia, MidpointRounding.AwayFromZero);
+                    sb.AppendLine($"Ocena końcowa: {ocenaKoncowa:F0}");
+
                 }
                 else
                 {
                     sb.AppendLine("Średnia: Brak ocen");
+                    sb.AppendLine("Ocena końcowa: Brak");
                 }
                 sb.AppendLine("Oceny:");
-                foreach (var ocena in po.Oceny)
+                if (po.Oceny.Count > 0)
                 {
-                    sb.AppendLine($" - Ocena: {ocena.Wartosc}");
+                    foreach (var ocena in po.Oceny)
+                    {
+                        sb.AppendLine($" - {ocena.Wartosc}");
+                    }
                 }
+                else
+                {
+                    sb.AppendLine(" - (brak)");
+                }
+
                 sb.AppendLine("----------------");
 
             }
