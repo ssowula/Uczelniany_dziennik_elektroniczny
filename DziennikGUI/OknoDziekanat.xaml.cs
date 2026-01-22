@@ -85,6 +85,11 @@ namespace DziennikGUI
             {
                 try
                 {
+                    if (listaStudentow.SelectedIndex < 0)
+                    {
+                        MessageBox.Show("Wybierz studenta", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
                     int indeks = listaStudentow.SelectedIndex;
                     Student wybranyStudent = uczelnia.Studenci[indeks];
                     string trescRaportu = wybranyStudent.GenerujRaport();
