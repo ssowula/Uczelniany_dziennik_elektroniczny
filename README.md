@@ -1,2 +1,2 @@
 # dziennik
-Jo napot kivano!
+
