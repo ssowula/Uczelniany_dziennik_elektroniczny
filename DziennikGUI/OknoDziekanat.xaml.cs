@@ -27,6 +27,9 @@ namespace DziennikGUI
 
             cmbProwadzacy.ItemsSource = uczelnia.Prowadzacy;
 
+            cmbTytulNaukowy.ItemsSource = Enum.GetValues(typeof(EnumTytulNaukowy));
+            cmbTytulNaukowy.SelectedIndex = 0;
+            OdswiezListeProwadzacych();
         }
 
         private void ButtonDodaj_Click(object sender, RoutedEventArgs e)
@@ -170,6 +173,7 @@ namespace DziennikGUI
 
                 _aktualnieTworzonySemestr = new Semestr();
                 listaPrzedmiotow.ItemsSource = null;
+                OdswiezPodgladSemestrowTworzonych();
             }
             catch (Exception ex)
             {
@@ -230,16 +234,98 @@ namespace DziennikGUI
 
         private void OdswiezPodgladSemestrowTworzonych()
         {
-            listaSemestrow.Items.Clear();
+            listaSemestrow.ItemsSource = null;
+            listaSemestrow.ItemsSource = _tymczasoweSemestryKierunku;
+        }
 
-            foreach (Semestr s in _tymczasoweSemestryKierunku)
+        private void OdswiezListeProwadzacych()
+        {
+            listaProwadzacych.Items.Clear();
+            foreach (var p in uczelnia.Prowadzacy)
             {
-                string opis = $"{s.PobierzInformacjeS()} (Przedmiotów: {s.Przedmioty.Count})";
+                listaProwadzacych.Items.Add(p.PobierzInformacje());
+            }
+            cmbProwadzacy.ItemsSource = null;
+            cmbProwadzacy.ItemsSource = uczelnia.Prowadzacy;
+        }
 
-                listaSemestrow.Items.Add(opis);
+        private void WyczyscPolaProwadzacego()
+        {
+            txtImieProw.Clear();
+            txtNazwiskoProw.Clear();
+            txtPeselProw.Clear();
+            cmbTytulNaukowy.SelectedIndex = 0;
+            listaPrzedmiotowProwadzacego.Items.Clear();
+        }
+
+        private void ButtonDodajProw_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string imie = txtImieProw.Text;
+                string nazwisko = txtNazwiskoProw.Text;
+                string pesel = txtPeselProw.Text;
+                EnumTytulNaukowy tytul = (EnumTytulNaukowy)cmbTytulNaukowy.SelectedItem;
+
+                Prowadzacy nowy = new Prowadzacy(imie, nazwisko, pesel, tytul);
+                uczelnia.DodajProwadzacego(nowy);
+
+                OdswiezListeProwadzacych();
+                WyczyscPolaProwadzacego();
+                MessageBox.Show("Dodano prowadzącego", "Sukces");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-       
+
+        private void ButtonUsunProw_Click(object sender, RoutedEventArgs e)
+        {
+            if (listaProwadzacych.SelectedIndex < 0)
+            {
+                MessageBox.Show("Wybierz prowadzącego", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                int indeks = listaProwadzacych.SelectedIndex;
+                Prowadzacy wybrany = uczelnia.Prowadzacy[indeks];
+                uczelnia.UsunProwadzacego(wybrany);
+
+                OdswiezListeProwadzacych();
+                WyczyscPolaProwadzacego();
+                MessageBox.Show("Usunięto prowadzącego", "Sukces");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+
+        private void ListaProwadzacych_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            bool czyWybrano = listaProwadzacych.SelectedIndex >= 0;
+            if (btnUsunProw != null) btnUsunProw.IsEnabled = czyWybrano;
+
+            if (!czyWybrano) return;
+
+            Prowadzacy wybrany = uczelnia.Prowadzacy[listaProwadzacych.SelectedIndex];
+            txtImieProw.Text = wybrany.Imie;
+            txtNazwiskoProw.Text = wybrany.Nazwisko;
+            txtPeselProw.Text = wybrany.Pesel;
+            cmbTytulNaukowy.SelectedItem = wybrany.TytulNaukowy;
+
+            listaPrzedmiotowProwadzacego.Items.Clear();
+            var przedmioty = wybrany.ZnajdzPrzedmiotyProwadzacego(uczelnia);
+            foreach (var pp in przedmioty)
+            {
+                listaPrzedmiotowProwadzacego.Items.Add($"{pp.Przedmiot.Nazwa} ({pp.Kierunek.NazwaKierunku})");
+            }
+        }
     }
 }
