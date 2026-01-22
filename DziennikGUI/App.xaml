@@ -28,6 +28,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="MinHeight" Value="24"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
@@ -38,6 +39,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="MinHeight" Value="24"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
@@ -48,6 +50,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="MinHeight" Value="24"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
@@ -58,6 +61,7 @@
             <Setter Property="Foreground" Value="#333"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="MinHeight" Value="24"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
