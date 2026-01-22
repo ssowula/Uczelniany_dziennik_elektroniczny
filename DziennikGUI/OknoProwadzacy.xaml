@@ -113,7 +113,7 @@
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
                         <Button x:Name="btnDodajOcene" Content="Dodaj ocenę" Padding="10,5" Margin="0,0,0,5" IsEnabled="False" Click="btnDodajOcene_Click"/>
-                        <Button Content="Edytuj" Padding="10,5" IsEnabled="False"/>
+                        <Button x:Name="btnEdytujOcene" Content="Edytuj Ocenę" Padding="10,5" IsEnabled="False" Click="btnEdytuj_Ocene"/>
                     </StackPanel>
                 </Grid>
 
