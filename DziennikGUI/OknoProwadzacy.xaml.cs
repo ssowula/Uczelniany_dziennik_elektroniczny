@@ -47,5 +47,14 @@ namespace DziennikGUI
                 listaPrzedmiotow.ItemsSource = przedmioty;
             }
         }
+
+        private void listaPrzedmiotow_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var wybrany = listaPrzedmiotow.SelectedItem as ProwadzonyPrzedmiot;
+
+            if (wybrany == null) return;
+
+            panelDanePrzedmiotu.DataContext = wybrany;
+        }
     }
 }

@@ -14,7 +14,6 @@
 
         <!-- Lewa kolumna -->
         <StackPanel Grid.Column="0">
-            <!-- Karta prowadzącego -->
             <Border Background="White" CornerRadius="8" Padding="20 15" Margin="0,0,10,15">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
@@ -38,7 +37,6 @@
                 </StackPanel>
             </Border>
 
-            <!-- Twoje Przedmioty z ScrollViewerem -->
             <Border Background="White" CornerRadius="8" Padding="15" Margin="0,0,10,0">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
@@ -52,9 +50,8 @@
 
                     <TextBlock Text="Twoje Przedmioty" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" Grid.Row="0"/>
 
-                    <!-- ScrollViewer dla listy przedmiotów -->
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="350">
-                        <ListBox x:Name="listaPrzedmiotow" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox x:Name="listaPrzedmiotow" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="listaPrzedmiotow_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border Background="#F5F5F7" CornerRadius="6" Padding="12" Margin="0,0,0,8" Cursor="Hand" Width="300">
@@ -76,7 +73,7 @@
             </Border>
         </StackPanel>
 
-        <!-- Prawa kolumna - Szczegóły przedmiotu -->
+        <!-- Prawa kolumna -->
         <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,0">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
@@ -85,14 +82,56 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="120"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Nagłówek -->
                 <TextBlock Text="Szczegóły przedmiotu" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15" Grid.Row="0"/>
+                <Grid Grid.Row="1" Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                
+                    <StackPanel x:Name="panelDanePrzedmiotu" Grid.Column="0">
+                        <TextBlock Text="{Binding Przedmiot.Nazwa}" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Margin="0,5,0,0">
+                            <Run Text="Kierunek: "/>
+                            <Run Text="{Binding Kierunek.NazwaKierunku, Mode=OneWay}"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Semestr: "/>
+                            <Run Text="{Binding Semestr.Typ, Mode=OneWay}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding Semestr.RokAkademicki, Mode=OneWay}"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="ECTS: "/>
+                            <Run Text="{Binding Przedmiot.Ects, Mode=OneWay}"/>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                        <Button Content="Dodaj ocenę" Padding="10,5" Margin="0,0,0,5" IsEnabled="False"/>
+                        <Button Content="Edytuj" Padding="10,5" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+
+
+                <Border Grid.Row="2" Background="#F8F9FA" CornerRadius="6" Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Lista studentów" FontWeight="SemiBold" Margin="0,0,0,10" Grid.Row="0"/>
+
+                        <ListBox x:Name="listaStudentow" Grid.Row="1" BorderThickness="0" Background="Transparent">
+
+                        </ListBox>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
     </Grid>
