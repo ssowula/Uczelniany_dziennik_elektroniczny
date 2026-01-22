@@ -147,6 +147,7 @@ namespace Testy_Jednostkowe
             Assert.AreEqual(22.0 / 6.0, przedmiotOceny.SredniaOcen(),0.001);
         }
     }
+
     [TestClass]
     public sealed class XMLFileManagerTest
     {
