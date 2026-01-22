@@ -239,23 +239,30 @@ namespace DziennikGUI
 
         private void OdswiezPodgladSemestrowTworzonych()
         {
-<<<<<<< HEAD
+            // listaSemestrow jest powiązana z SemestryDlaNowegoKierunku (ObservableCollection), więc odświeża się sama
+            // Jeżeli jednak są problemy, wymuszamy odświeżenie:
             listaSemestrow.ItemsSource = null;
-            listaSemestrow.ItemsSource = _tymczasoweSemestryKierunku;
+            listaSemestrow.ItemsSource = SemestryDlaNowegoKierunku;
         }
+
+        private bool _sortowanieRosnaco = false; 
 
         private void OdswiezListeProwadzacych()
         {
+            uczelnia.SortujProwadzacychPoTytule(_sortowanieRosnaco); // Sortowanie po tytule naukowym
             listaProwadzacych.Items.Clear();
             foreach (var p in uczelnia.Prowadzacy)
-=======
-            foreach (Semestr s in _tymczasoweSemestryKierunku)
->>>>>>> 7d867c16d8ef7e6a936c69d6843c80c51924a77f
             {
                 listaProwadzacych.Items.Add(p.PobierzInformacje());
             }
             cmbProwadzacy.ItemsSource = null;
             cmbProwadzacy.ItemsSource = uczelnia.Prowadzacy;
+        }
+
+        private void ButtonSortujProw_Click(object sender, RoutedEventArgs e)
+        {
+            _sortowanieRosnaco = !_sortowanieRosnaco;
+            OdswiezListeProwadzacych();
         }
 
         private void WyczyscPolaProwadzacego()

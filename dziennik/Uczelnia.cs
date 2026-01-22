@@ -103,10 +103,10 @@ namespace dziennik
             Prowadzacy.Sort();
         }
 
-        public void SortujProwadzacychPoTytule()
+        public void SortujProwadzacychPoTytule(bool rosnaco)
         {
             
-            Prowadzacy.Sort(new ProwadzacyTytulComparer());
+            Prowadzacy.Sort(new ProwadzacyTytulComparer(rosnaco));
         }
 
 
