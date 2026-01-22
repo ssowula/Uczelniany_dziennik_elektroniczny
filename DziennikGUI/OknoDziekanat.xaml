@@ -40,6 +40,9 @@
         </TabItem>
 
         <TabItem Header="Prowadzący">
+            <Grid>
+                
+            </Grid>
         </TabItem>
 
         <TabItem Header="Kierunki">
