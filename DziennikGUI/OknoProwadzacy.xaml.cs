@@ -55,6 +55,58 @@ namespace DziennikGUI
             if (wybrany == null) return;
 
             panelDanePrzedmiotu.DataContext = wybrany;
+
+            var studenci = uczelnia.Studenci
+                .Where(s => s.PrzedmiotyOceny.Any(po =>
+                    po.Przedmiot.Nazwa == wybrany.Przedmiot.Nazwa &&
+                    po.Przedmiot.Prowadzacy.Pesel == zalogowanyProwadzacy.Pesel))
+                .ToList();
+
+            var studentyDoWyswietlenia = studenci.Select(s =>
+            {
+                var przedmiotOceny = s.PrzedmiotyOceny.FirstOrDefault(po => po.Przedmiot.Nazwa == wybrany.Przedmiot.Nazwa);
+
+                return new StudentOcenyPrzedmiot
+                {
+                    ImieNazwisko = $"{s.Imie} {s.Nazwisko}",
+                    NumerAlbumu = s.NumerAlbumu,
+                    Oceny = przedmiotOceny != null && przedmiotOceny.Oceny.Any()
+                        ? string.Join("; ", przedmiotOceny.Oceny.Select(o => o.Wartosc))
+                        : "Brak",
+                    Srednia = przedmiotOceny?.SredniaOcen() ?? 0
+                };
+            }).ToList();
+
+            listaStudentow.ItemsSource = studentyDoWyswietlenia;
+        }
+
+        private void listaStudentow_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var wybranyStudent = listaStudentow.SelectedItem as StudentOcenyPrzedmiot;
+
+            if (wybranyStudent == null)
+            {
+                btnDodajOcene.IsEnabled = false;
+            }
+            else
+            {
+                btnDodajOcene.IsEnabled = true;
+            }
+
+
+        }
+
+        private void btnDodajOcene_Click(object sender, RoutedEventArgs e)
+        {
+            var wybranyPrzedmiot = listaPrzedmiotow.SelectedItem as ProwadzonyPrzedmiot;
+            var wybranyStudent = listaStudentow.SelectedItem as StudentOcenyPrzedmiot;
+
+            if (wybranyPrzedmiot == null || wybranyStudent == null) return;
+
+            var oknoDodawaniaOceny = new OknoDodawaniaOceny(uczelnia, zalogowanyProwadzacy, wybranyStudent.NumerAlbumu, wybranyPrzedmiot.Przedmiot.Nazwa);
+            oknoDodawaniaOceny.ShowDialog();
+
+            listaPrzedmiotow_SelectionChanged(null, null);
         }
     }
 }

@@ -112,7 +112,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                        <Button Content="Dodaj ocenę" Padding="10,5" Margin="0,0,0,5" IsEnabled="False"/>
+                        <Button x:Name="btnDodajOcene" Content="Dodaj ocenę" Padding="10,5" Margin="0,0,0,5" IsEnabled="False" Click="btnDodajOcene_Click"/>
                         <Button Content="Edytuj" Padding="10,5" IsEnabled="False"/>
                     </StackPanel>
                 </Grid>
@@ -127,9 +127,21 @@
 
                         <TextBlock Text="Lista studentów" FontWeight="SemiBold" Margin="0,0,0,10" Grid.Row="0"/>
 
-                        <ListBox x:Name="listaStudentow" Grid.Row="1" BorderThickness="0" Background="Transparent">
-
-                        </ListBox>
+                        <DataGrid x:Name="listaStudentow" Grid.Row="1" 
+                            AutoGenerateColumns="False" 
+                            IsReadOnly="True"
+                            HeadersVisibility="Column"
+                            GridLinesVisibility="Horizontal"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            SelectionChanged="listaStudentow_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Student" Binding="{Binding ImieNazwisko}" Width="*"/>
+                                <DataGridTextColumn Header="Indeks" Binding="{Binding NumerAlbumu}" Width="80"/>
+                                <DataGridTextColumn Header="Oceny" Binding="{Binding Oceny}" Width="200"/>
+                                <DataGridTextColumn Header="Średnia" Binding="{Binding Srednia, StringFormat='{}{0:F2}'}" Width="70"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
                 </Border>
             </Grid>

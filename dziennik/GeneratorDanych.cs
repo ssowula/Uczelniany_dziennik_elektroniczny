@@ -18,7 +18,6 @@ namespace dziennik
 
             Przedmiot matma = new Przedmiot("Matematyka", p1, 5);
             Przedmiot prog = new Przedmiot("Programowanie Obiektowe", p2, 6);
-            Przedmiot analiz = new Przedmiot("Analiza Matematyczna", p1, 5);
             Przedmiot bazy = new Przedmiot("Bazy Danych", p1, 4);
 
             Kierunek informatyka = new Kierunek("Informatyka");
