@@ -10,6 +10,7 @@ namespace DziennikGUI
         Uczelnia uczelnia;
         #region
         private List<Semestr> _tymczasoweSemestryKierunku = new List<Semestr>();
+        public ObservableCollection<Semestr> SemestryDlaNowegoKierunku { get; set; }
         private Semestr _aktualnieTworzonySemestr = new Semestr();
         public ObservableCollection<Kierunek> ListaKierunkow { get; set; }
         #endregion
@@ -24,6 +25,9 @@ namespace DziennikGUI
             OdswiezlisteKierunkow();
             cmbTypSemestru.ItemsSource = Enum.GetValues(typeof(EnumTyp));
             cmbTypSemestru.SelectedIndex = 0;
+            SemestryDlaNowegoKierunku = new ObservableCollection<Semestr>();
+            listaSemestrow.ItemsSource = SemestryDlaNowegoKierunku;
+            OdswiezPodgladSemestrowTworzonych();
 
             cmbProwadzacy.ItemsSource = uczelnia.Prowadzacy;
 
@@ -167,7 +171,7 @@ namespace DziennikGUI
                 _aktualnieTworzonySemestr.RokAkademicki = rok;
                 _aktualnieTworzonySemestr.Typ = (EnumTyp)cmbTypSemestru.SelectedItem;
 
-                _tymczasoweSemestryKierunku.Add(_aktualnieTworzonySemestr);
+                SemestryDlaNowegoKierunku.Add(_aktualnieTworzonySemestr);
 
                 MessageBox.Show($"Dodano semestr {_aktualnieTworzonySemestr.Typ} {rok} do bufora kierunku.");
 
@@ -179,6 +183,7 @@ namespace DziennikGUI
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
         private void Button_ZapiszKierunek_Click(object sender, RoutedEventArgs e)
@@ -191,7 +196,7 @@ namespace DziennikGUI
                 return;
             }
 
-            if (_tymczasoweSemestryKierunku.Count == 0)
+            if (SemestryDlaNowegoKierunku.Count == 0)
             {
                 var decyzja = MessageBox.Show("Dodajesz kierunek bez semestrów. Czy na pewno?", "Pusty kierunek", MessageBoxButton.YesNo);
                 if (decyzja == MessageBoxResult.No) return;
@@ -199,7 +204,7 @@ namespace DziennikGUI
 
             Kierunek nowyKierunek = new Kierunek(nazwaKierunku);
 
-            foreach (var semestr in _tymczasoweSemestryKierunku)
+            foreach (var semestr in SemestryDlaNowegoKierunku)
             {
                 try
                 {
@@ -213,7 +218,7 @@ namespace DziennikGUI
 
             uczelnia.DodajKierunek(nowyKierunek);
 
-            _tymczasoweSemestryKierunku.Clear();
+            SemestryDlaNowegoKierunku.Clear();
             _aktualnieTworzonySemestr = new Semestr();
             txtNazwaKierunku.Clear();
             txtRokAkademicki.Clear();
@@ -234,6 +239,7 @@ namespace DziennikGUI
 
         private void OdswiezPodgladSemestrowTworzonych()
         {
+<<<<<<< HEAD
             listaSemestrow.ItemsSource = null;
             listaSemestrow.ItemsSource = _tymczasoweSemestryKierunku;
         }
@@ -242,6 +248,9 @@ namespace DziennikGUI
         {
             listaProwadzacych.Items.Clear();
             foreach (var p in uczelnia.Prowadzacy)
+=======
+            foreach (Semestr s in _tymczasoweSemestryKierunku)
+>>>>>>> 7d867c16d8ef7e6a936c69d6843c80c51924a77f
             {
                 listaProwadzacych.Items.Add(p.PobierzInformacje());
             }
