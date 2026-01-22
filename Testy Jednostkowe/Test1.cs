@@ -395,4 +395,86 @@ namespace Testy_Jednostkowe
             Assert.IsTrue(ex.Message.Contains("nie istnieje"));
         }
     }
+
+    [TestClass]
+    public class KierunekTest
+    {
+        [TestMethod]
+        public void TestKonstruktor_PoprawnaInicjalizacja()
+        {
+            string nazwa = "Informatyka Stosowana";
+            Kierunek kierunek = new Kierunek(nazwa);
+
+            Assert.AreEqual(nazwa, kierunek.NazwaKierunku);
+            Assert.IsNotNull(kierunek.Semestry, "Lista semestrów nie powinna być nullem po utworzeniu obiektu");
+            Assert.AreEqual(0, kierunek.Semestry.Count, "Nowy kierunek powinien mieć pustą listę semestrów");
+        }
+
+
+        [TestMethod]
+        public void TestDodajSemestr_Sukces()
+        {
+            Kierunek kierunek = new Kierunek("Automatyka");
+            Semestr semestr = new Semestr(2024, EnumTyp.Zimowy);
+
+            kierunek.DodajSemestr(semestr);
+
+            Assert.AreEqual(1, kierunek.Semestry.Count);
+
+            Assert.AreSame(semestr, kierunek.Semestry[0]);
+        }
+
+        [TestMethod]
+        public void TestDodajSemestr_BladDuplikatu()
+        {
+
+            Kierunek kierunek = new Kierunek("Automatyka");
+
+            Semestr s1 = new Semestr(2024, EnumTyp.Zimowy);
+            Semestr s2 = new Semestr(2024, EnumTyp.Zimowy);
+
+            kierunek.DodajSemestr(s1);
+
+            var ex = Assert.ThrowsException<Exception>(() => kierunek.DodajSemestr(s2));
+            Assert.IsTrue(ex.Message.Contains("już istnieje"));
+        }
+
+        [TestMethod]
+        public void TestDodajSemestr_RozneSemestry()
+        {
+
+            Kierunek kierunek = new Kierunek("Budownictwo");
+            Semestr zimowy = new Semestr(2024, EnumTyp.Zimowy);
+            Semestr letni = new Semestr(2024, EnumTyp.Letni); 
+
+            kierunek.DodajSemestr(zimowy);
+            kierunek.DodajSemestr(letni);
+
+            Assert.AreEqual(2, kierunek.Semestry.Count);
+        }
+
+
+        [TestMethod]
+        public void TestUsunSemestr_Sukces()
+        {
+            Kierunek kierunek = new Kierunek("Fizyka");
+            Semestr s1 = new Semestr(2023, EnumTyp.Letni);
+            kierunek.DodajSemestr(s1);
+
+            kierunek.UsunSemestr(s1);
+
+            Assert.AreEqual(0, kierunek.Semestry.Count);
+        }
+
+        [TestMethod]
+        public void TestUsunSemestr_BladNieistniejacego()
+        {
+            Kierunek kierunek = new Kierunek("Matematyka");
+            Semestr s1 = new Semestr(2023, EnumTyp.Zimowy);
+
+            var ex = Assert.ThrowsException<Exception>(() => kierunek.UsunSemestr(s1));
+            Assert.IsTrue(ex.Message.Contains("nie został znaleziony"));
+        }
+
+    }
 }
