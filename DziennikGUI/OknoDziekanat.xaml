@@ -68,10 +68,10 @@
 
                     <DockPanel Grid.Column="0" LastChildFill="True">
                         <Label Content="Lista Semestrów" DockPanel.Dock="Top" FontWeight="Bold"/>
-                        <Button Content="Dodaj Semestr" DockPanel.Dock="Bottom" Height="30" Click="ButtonDodajSemestr_Click"/>
+                        <Button Content="Dodaj Semestr" DockPanel.Dock="Bottom" Height="30" Width="250" Click="ButtonDodajSemestr_Click"/>
 
                         <ListBox x:Name="listaSemestrow"
-             Margin="0,0,5,0">
+             Margin="0,0,5,0" Width="250">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Numer, StringFormat='Semestr {0}'}" FontWeight="Bold"/>

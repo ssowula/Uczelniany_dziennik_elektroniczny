@@ -148,5 +148,50 @@ namespace Testy_Jednostkowe
         }
 
     }
+    [TestClass]
+    public sealed class XMLFileManagerTest
+    {
+        const string test = "test_uczelnia_temp.xml";
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            if (File.Exists(test))
+            {
+                File.Delete(test);
+            }
+        }
+
+        [TestMethod]
+        public void TestZapiszWczytajXML()
+        {
+            Uczelnia uczelnia = new Uczelnia();
+
+            var k1 = new Kierunek("Informatyka");
+            var s1 = new Student("Jan", "Kowalski", "11122233312");
+            var p1 = new Prowadzacy("Anna", "Nowak", "12345678911", EnumTytulNaukowy.Doktor);
+
+            uczelnia.DodajKierunek(k1);
+            uczelnia.DodajStudenta(s1);
+            uczelnia.DodajProwadzacego(p1);
+
+            XMLFileManager.Zapisz(uczelnia, test);
+
+            Assert.IsTrue(File.Exists(test));
+
+            Uczelnia? wczytanaUczelnia = XMLFileManager.Wczytaj(test);
+
+            Assert.IsNotNull(wczytanaUczelnia);
+
+            Assert.AreEqual(1, wczytanaUczelnia.Studenci.Count);
+            Assert.AreEqual("Jan", wczytanaUczelnia.Studenci[0].Imie);
+            Assert.AreEqual("Kowalski", wczytanaUczelnia.Studenci[0].Nazwisko);
+
+            Assert.AreEqual(1, wczytanaUczelnia.Prowadzacy.Count);
+            Assert.AreEqual(EnumTytulNaukowy.Doktor, wczytanaUczelnia.Prowadzacy[0].TytulNaukowy);
+
+            Assert.AreEqual(1, wczytanaUczelnia.Kierunki.Count);
+            Assert.AreEqual("Informatyka", wczytanaUczelnia.Kierunki[0].NazwaKierunku);
+        }
+    }
 }
