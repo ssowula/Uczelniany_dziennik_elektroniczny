@@ -128,5 +128,11 @@ namespace DziennikGUI
 
             listaPrzedmiotow_SelectionChanged(null, null);
         }
+        private void BtnWyloguj_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow logowanie = new MainWindow();
+            logowanie.Show();
+            this.Close();
+        }
     }
 }

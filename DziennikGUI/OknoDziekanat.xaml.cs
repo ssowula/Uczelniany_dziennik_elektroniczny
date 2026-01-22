@@ -362,5 +362,11 @@ namespace DziennikGUI
                 listaPrzedmiotowProwadzacego.Items.Add($"{pp.Przedmiot.Nazwa} ({pp.Kierunek.NazwaKierunku})");
             }
         }
+        private void BtnWyloguj_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow logowanie = new MainWindow();
+            logowanie.Show();
+            this.Close();
+        }
     }
 }

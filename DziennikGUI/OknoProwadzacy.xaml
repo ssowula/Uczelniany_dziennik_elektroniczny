@@ -112,6 +112,9 @@
                     <StackPanel Grid.Column="1" VerticalAlignment="Top">
                         <Button x:Name="btnDodajOcene" Content="Dodaj ocenę" Margin="0,0,0,5" Width="100" Height="24" IsEnabled="False" Click="btnDodajOcene_Click" Style="{StaticResource BtnPrimary}"/>
                         <Button x:Name="btnEdytujOcene" Content="Edytuj Ocenę" Width="100" Height="24" IsEnabled="False" Click="btnEdytuj_Ocene" Style="{StaticResource BtnSecondary}"/>
+                        <Button Grid.Row="3" Content="Wyloguj" Click="BtnWyloguj_Click" 
+        Height="35" Width="100" HorizontalAlignment="Right" Margin="0,20,0,0"
+        Style="{StaticResource BtnDanger}"/>
                     </StackPanel>
                 </Grid>
 
