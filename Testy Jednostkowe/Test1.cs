@@ -68,6 +68,31 @@ namespace Testy_Jednostkowe
             Assert.AreEqual(4.0, zapis.Oceny[0].Wartosc);
 
         }
+
+        [TestMethod]
+        public void TestClone()
+        {
+            var student = new Student("Jan", "Kowalski", "12345678911");
+            var prowadzacy = new Prowadzacy("Adam", "Nowak", "11122233344", EnumTytulNaukowy.Doktor);
+            var przedmiot = new Przedmiot("Matematyka", prowadzacy, 5);
+
+            student.DodajPrzedmiot(przedmiot);
+            student.DodajOcene(przedmiot, 5.0);
+
+            Student klon = (Student)student.Clone();
+
+            klon.DodajOcene(przedmiot, 2.0);
+
+            Assert.AreEqual(student.Pesel, klon.Pesel);
+
+            Assert.AreNotSame(student.PrzedmiotyOceny, klon.PrzedmiotyOceny);
+
+            var ocenyOryginalu = student.PrzedmiotyOceny.First().Oceny;
+            var ocenyKlona = klon.PrzedmiotyOceny.First().Oceny;
+
+            Assert.AreEqual(1, ocenyOryginalu.Count);
+            Assert.AreEqual(2, ocenyKlona.Count);
+        }
     }
 
     [TestClass]
