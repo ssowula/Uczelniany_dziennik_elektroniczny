@@ -1,38 +1,49 @@
 <Window x:Class="DziennikGUI.OknoDodawaniaOceny"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Dodaj Ocenę" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Dodaj Ocenę" Height="300" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FFEAECEF">
+    
     <Grid Margin="15">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <Border Background="White" CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="12" Color="#D0D0D0" Direction="270" ShadowDepth="3" Opacity="0.4"/>
+            </Border.Effect>
 
-        <TextBlock Text="Dodawanie oceny" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="0"/>
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Margin="0,0,0,10">
-            <TextBlock x:Name="txtStudentInfo" Text="Student: Jan Kowalski (12345)" Foreground="Gray"/>
-            <TextBlock x:Name="txtPrzedmiotInfo" Text="Przedmiot: Matematyka" Foreground="Gray"/>
-        </StackPanel>
+                <TextBlock Text="Oceń Studenta" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15" Grid.Row="0"/>
 
-        <StackPanel Grid.Row="2">
-            <TextBlock Text="Wybierz ocenę:" Margin="0,0,0,5"/>
-            <ComboBox x:Name="comboOcena" Width="100" HorizontalAlignment="Left">
-                <ComboBoxItem Content="2.0"/>
-                <ComboBoxItem Content="3.0"/>
-                <ComboBoxItem Content="3.5"/>
-                <ComboBoxItem Content="4.0"/>
-                <ComboBoxItem Content="4.5"/>
-                <ComboBoxItem Content="5.0"/>
-            </ComboBox>
-        </StackPanel>
+                <StackPanel Grid.Row="1" Margin="0,0,0,20">
+                    <TextBlock x:Name="txtStudentInfo" Text="Student" FontWeight="Bold" Foreground="#333" FontSize="14"/>
+                    <TextBlock x:Name="txtPrzedmiotInfo" Text="Przedmiot" Foreground="Gray" Margin="0,2,0,0"/>
+                </StackPanel>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button x:Name="btnAnuluj" Content="Anuluj" Width="80" Margin="0,0,10,0" Click="btnAnuluj_Click"/>
-            <Button x:Name="btnZapisz" Content="Zapisz" Width="80" Click="btnZapisz_Click"/>
-        </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <Label Content="Ocena końcowa:" FontWeight="SemiBold" Foreground="#555"/>
+                    <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="4" Background="#FAFAFA" Width="120" HorizontalAlignment="Left">
+                        <ComboBox x:Name="comboOcena" Padding="5" BorderThickness="0" Background="Transparent" Height="30">
+                            <ComboBoxItem Content="2.0"/>
+                            <ComboBoxItem Content="3.0"/>
+                            <ComboBoxItem Content="3.5"/>
+                            <ComboBoxItem Content="4.0"/>
+                            <ComboBoxItem Content="4.5"/>
+                            <ComboBoxItem Content="5.0"/>
+                        </ComboBox>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,25,0,0">
+                    <Button x:Name="btnAnuluj" Content="Anuluj" Width="90" Height="35" Margin="0,0,10,0" Click="btnAnuluj_Click" Style="{StaticResource BtnSecondary}"/>
+                    <Button x:Name="btnZapisz" Content="Zapisz" Width="100" Height="35" Click="btnZapisz_Click" Style="{StaticResource BtnPrimary}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
