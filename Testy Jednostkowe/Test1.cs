@@ -324,7 +324,7 @@ namespace Testy_Jednostkowe
             uczelnia.DodajProwadzacego(pProf);
             uczelnia.DodajProwadzacego(pDr);
 
-            uczelnia.SortujProwadzacychPoTytule();
+            uczelnia.SortujProwadzacychPoTytule(false);
 
             Assert.AreEqual(EnumTytulNaukowy.Profesor, uczelnia.Prowadzacy[0].TytulNaukowy);
             Assert.AreEqual(EnumTytulNaukowy.Doktor, uczelnia.Prowadzacy[1].TytulNaukowy);

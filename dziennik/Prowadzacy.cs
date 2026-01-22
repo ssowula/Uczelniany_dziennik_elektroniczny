@@ -86,12 +86,29 @@ namespace dziennik
 
     internal class ProwadzacyTytulComparer : IComparer<Prowadzacy>
     {
+        private bool _rosnaco;
+
+        public ProwadzacyTytulComparer(bool rosnaco)
+        {
+            _rosnaco = rosnaco;
+        }
+
         public int Compare(Prowadzacy? x, Prowadzacy? y)
         {
             if (x == null || y == null) return 0;
 
+
+            int wynikTytul; 
             
-            int wynikTytul = y.TytulNaukowy.CompareTo(x.TytulNaukowy);
+            if(_rosnaco)
+            {
+               wynikTytul = x.TytulNaukowy.CompareTo(y.TytulNaukowy);
+            }
+            else
+            {
+               wynikTytul = y.TytulNaukowy.CompareTo(x.TytulNaukowy);
+            }
+             
 
             if (wynikTytul != 0)
             {
