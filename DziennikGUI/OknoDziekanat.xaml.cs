@@ -57,7 +57,28 @@ namespace DziennikGUI
                 MessageBox.Show(ex.Message, "Błąd walidacji", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+        private void ButtonUsun_Click(object sender, RoutedEventArgs e)
+        {
+            if(listaStudentow.SelectedIndex < 0)
+            {
+                MessageBox.Show("Wybierz studenta", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                int indeks = listaStudentow.SelectedIndex;
+                Student wybranyStudent = uczelnia.Studenci[indeks];
+                uczelnia.UsunStudenta(wybranyStudent);
+                WyczyscPola();
+                MessageBox.Show("Usunięto studenta", "Sukces");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
+            OdswiezListeStudentow();
+        }
         private void OdswiezListeStudentow()
         {
             listaStudentow.Items.Clear();
@@ -368,5 +389,7 @@ namespace DziennikGUI
             logowanie.Show();
             this.Close();
         }
+
+       
     }
 }
